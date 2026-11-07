@@ -1,0 +1,65 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import ProductCatalog from '@/components/ProductCatalogClient.astro'; 
+import vegetableRawData from '../data/products.json';
+
+// Logika Unique Map (Server-side Build)
+const uniqueMap = new Map();
+if (vegetableRawData) {
+  vegetableRawData.forEach(item => {
+    if (!uniqueMap.has(item.name)) {
+      uniqueMap.set(item.name, item);
+    }
+  });
+}
+const vegetableData = Array.from(uniqueMap.values());
+
+// Meta Data Strategis
+const title = "Katalog Komoditas Sayur Segar Cipanas | Green Fresh B2B Supply";
+const description = "Jelajahi lebih dari 70 jenis sayuran grade A langsung dari petani Cipanas. Stok harian stabil, sortir premium, dan pengiriman terjadwal Jabodetabek.";
+
+const lcpImage = vegetableData.length > 0 ? vegetableData[0].image : null;
+---
+
+<MainLayout title={title} description={description}>
+
+  {lcpImage && (
+    <link
+      rel="preload"
+      as="image"
+      href={lcpImage}
+      slot="head" 
+    />
+  )}
+
+  <script is:inline slot="head">
+    document.documentElement.classList.add('js-enabled');
+  </script>
+
+  <div class="bg-[#fcfdfc] min-h-screen font-sans overflow-x-hidden text-left">
+    <Header />
+
+    <main>
+      <ProductCatalog initialData={vegetableData} />
+    </main>
+
+    <Footer />
+  </div>
+</MainLayout>
+
+<style is:global>
+  /** * PERBAIKAN: Memastikan scroll-behavior berada di dalam selector html.
+   * Gunakan sintaks standar tanpa karakter aneh hasil copy-paste.
+   */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Tambahan reset sederhana untuk konsistensi */
+  body {
+    margin: 0;
+    padding: 0;
+  }
+</style>

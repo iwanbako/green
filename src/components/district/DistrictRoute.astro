@@ -1,0 +1,154 @@
+---
+/**
+ * DISTRICT ROUTE - ASTRO VERSION (SEO Optimized & Dark Mode)
+ * Strategi: Zero Hydration untuk Kejelasan Logistik di mata Googlebot.
+ */
+import { Navigation, MapPin, ArrowRight, Truck, Clock, PackageCheck, ShieldCheck, Box } from 'lucide-react';
+
+const { district } = Astro.props;
+
+// Penanganan data rute di sisi server (Build Time)
+const routeString = district?.deliveryRoute || "Cipanas - Hub Utama";
+const routes = routeString.split('-');
+
+const getETA = () => {
+  const timeValue = district?.logistics?.time || "";
+  const timeMatch = timeValue.match(/(\d+\.\d+)/);
+  return timeMatch ? `${parseInt(timeMatch[1]) + 1} Jam` : "2-3 Jam";
+};
+---
+
+<section class="py-16 md:py-24 bg-[#0b130f] font-sans text-left border-y border-emerald-900/40 reveal-container">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <div class="text-center mb-12 md:mb-16 max-w-3xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-emerald-950/80 text-emerald-400 rounded-full mb-4 border border-emerald-800/60 reveal-up">
+        <PackageCheck size={14} />
+        <span class="text-xs font-black uppercase tracking-wider">Logistics Tracking</span>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-[1000] text-white tracking-tight uppercase reveal-up">
+        Alur <span class="text-emerald-400">Distribusi.</span>
+      </h2>
+      <p class="mt-3 text-slate-300 font-medium reveal-up leading-relaxed" style="transition-delay: 0.1s;">
+        Pengiriman terjadwal dan terintegrasi dari Cipanas menuju <span class="font-bold text-emerald-300">{district?.name || 'Titik Tujuan'}</span>
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      
+      <!-- Card Rute Perjalanan -->
+      <div class="lg:col-span-2 bg-[#121f18] p-8 md:p-10 rounded-3xl border border-emerald-800/40 shadow-xl text-left reveal-left">
+        <h4 class="font-black text-white mb-8 flex items-center gap-2.5 text-lg uppercase tracking-tight">
+          <Navigation size={20} class="text-emerald-400" /> 
+          Rute Perjalanan
+        </h4>
+        
+        <div class="relative space-y-6">
+          {routes.map((route, index) => (
+            <div class="flex items-start gap-4">
+              <div class="flex flex-col items-center mt-1">
+                <div class={`w-4 h-4 rounded-full border-4 border-[#121f18] shadow-sm transition-colors duration-500 ${
+                  index === 0 ? 'bg-emerald-400' : 
+                  index === routes.length - 1 ? 'bg-emerald-600' : 
+                  'bg-slate-600'
+                }`}></div>
+                {index !== routes.length - 1 && <div class="w-0.5 h-12 bg-emerald-900/60"></div>}
+              </div>
+              <div class="flex-1 p-5 rounded-2xl bg-[#17281f] border border-emerald-800/50 group hover:border-emerald-500/60 transition-all">
+                <div class="flex justify-between items-center mb-1">
+                  <span class="text-[10px] font-black text-emerald-400 uppercase tracking-widest">
+                    {index === 0 ? 'Titik Muat' : index === routes.length - 1 ? 'Titik Bongkar' : `Transit ${index}`}
+                  </span>
+                </div>
+                <span class="text-white font-black text-lg leading-none tracking-tight">
+                  {route.trim()}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Sisi Kanan: Estimasi & Kapasitas -->
+      <div class="space-y-6 text-left">
+        
+        <!-- GPS Monitoring Card -->
+        <div class="p-8 rounded-3xl border bg-gradient-to-br from-[#0a1810] via-[#0f281a] to-[#0a1810] border-emerald-800/60 shadow-2xl text-white relative overflow-hidden reveal-right">
+          <div class="absolute -right-4 -bottom-4 opacity-10 text-emerald-400">
+            <Truck size={120} />
+          </div>
+
+          <div class="relative z-10">
+            <div class="flex justify-between items-center mb-10">
+              <div class="px-3 py-1 rounded-lg text-[10px] font-black uppercase tracking-tighter bg-emerald-600 text-white shadow-sm">
+                GPS Monitoring
+              </div>
+              <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></div>
+            </div>
+            
+            <p class="text-slate-400 text-xs font-bold uppercase tracking-widest">Estimasi Tiba</p>
+            <h3 class="text-5xl font-black my-2 tracking-tighter text-white">
+              {getETA()}
+            </h3>
+            
+            <div class="flex items-center gap-2 mt-6 p-3.5 bg-emerald-950/80 rounded-2xl border border-emerald-700/40">
+              <ShieldCheck size={18} class="text-emerald-400" />
+              <span class="text-[10px] font-bold text-slate-200 uppercase tracking-wider">Kondisi muatan: Terjaga Aman</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kapasitas Muat Card -->
+        <div class="p-6 bg-[#121f18] rounded-3xl border border-emerald-800/40 shadow-xl group hover:border-emerald-600/60 transition-all reveal-up" style="transition-delay: 0.2s;">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-[#17281f] flex items-center justify-center text-emerald-400 border border-emerald-800/60 transition-all shadow-sm">
+              <Box size={24} />
+            </div>
+            <div>
+              <h5 class="font-black text-white text-sm uppercase leading-none mb-1">Kapasitas Muat</h5>
+              <p class="text-xs text-slate-400 font-bold">Pemuatan Optimal (Max 2 Ton)</p>
+            </div>
+          </div>
+          <hr class="my-4 border-emerald-900/60" />
+          <button class="w-full py-4 bg-[#17281f] text-emerald-300 rounded-2xl font-black text-[10px] uppercase tracking-[0.2em] hover:bg-emerald-500 hover:text-[#0b130f] transition-all border border-emerald-800/60 shadow-sm">
+            Cek Jadwal Rutin
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .reveal-container .reveal-up,
+  .reveal-container .reveal-left,
+  .reveal-container .reveal-right {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal-up { transform: translateY(30px); }
+  .reveal-left { transform: translateX(-20px); }
+  .reveal-right { transform: translateX(20px); }
+
+  :global(.is-visible) .reveal-up,
+  :global(.is-visible) .reveal-left,
+  :global(.is-visible) .reveal-right {
+    opacity: 1;
+    transform: translate(0);
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal-container, .reveal-up').forEach(el => observer.observe(el));
+</script>

@@ -1,0 +1,164 @@
+---
+/**
+ * GENERATED FILE - DO NOT EDIT DIRECTLY
+ * Kota: Tangerang
+ * Mode: SSR Only — Safe Output
+ */
+
+import MainLayout from '@/layouts/MainLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+
+import CityHero from '@/components/city/CityHero.astro';
+import CityClientPage from '@/components/CityClientPage.astro';
+import { MapPin } from 'lucide-react';
+
+import { jabodetabekCities } from '@/data/cities';
+import { vegetableData } from '@/data/data.js'; 
+
+const city = {
+  "slug": "tangerang",
+  "name": "Tangerang",
+  "title": "Supplier Sayur Tangerang | Pemasok Sayuran Bandara & Mall",
+  "angle": "Layanan logistik sayuran untuk katering penerbangan dan resto di Tangerang. Memenuhi standar audit ketat.",
+  "seoContent": "Melayani area BSD, Karawaci, hingga Bandara Soekarno-Hatta. Kami menjamin keamanan pangan dengan proses pembersihan dan packing yang higienis untuk standar katering internasional.",
+  "clientFocus": "Flight Catering, Apartemen, & Food Court Tangerang",
+  "deliveryRoute": "Armada berpendingin via Tol Merak menjaga kesegaran produk.",
+  "usp": "Kapasitas harian masif dengan dukungan legalitas perusahaan lengkap.",
+  "logistics": [
+    {
+      "time": "19:30",
+      "title": "Quality Inspection",
+      "desc": "Sortasi higienis di area bersih Operational Hub."
+    },
+    {
+      "time": "01:00",
+      "title": "West Hub Transit",
+      "desc": "Pengiriman prioritas via rute tol Tangerang."
+    },
+    {
+      "time": "04:45",
+      "title": "Site Loading Drop",
+      "desc": "Penyerahan barang di area loading dock mitra."
+    }
+  ]
+};
+
+const title = `Supplier Sayur ${city.name} - CV Green Fresh Cipanas | Harga Kemitraan Perusahaan`;
+const description = `Layanan supply sayuran harian harga kompetitif untuk Hotel, Restoran, Cafe di wilayah ${city.name}.`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Service",
+      "name": `Supplier Sayur Segar ${city.name}`,
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "CV Green Fresh Cipanas"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": city.name
+      },
+      "description": description
+    }
+  ]
+};
+
+const currentIndex = jabodetabekCities.findIndex(c => c.slug === "tangerang");
+const otherCities = [];
+for (let i = 1; i <= 6; i++) {
+  const nextIndex = (currentIndex + i) % jabodetabekCities.length;
+  otherCities.push(jabodetabekCities[nextIndex]);
+}
+---
+
+<MainLayout title={title} description={description}>
+
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+
+  <div class="bg-white text-[#052c17] font-sans antialiased overflow-x-hidden reveal-container">
+    <Header />
+    <CityHero city={city} />
+
+    <main>
+
+      <section class="py-16 bg-white border-t border-slate-50">
+        <div class="max-w-4xl mx-auto px-6">
+          <article class="prose prose-green max-w-none reveal-up">
+            <h2 class="text-3xl md:text-5xl font-black uppercase mb-8 text-[#052c17] tracking-tighter">
+              Supplier Sayur Tangerang Terpercaya untuk Restoran, Hotel, & Supermarket
+            </h2>
+
+            <p class="text-lg text-slate-700 leading-relaxed mb-10 font-medium">
+              Dalam ekosistem bisnis kuliner yang sangat kompetitif di wilayah Tangerang, kualitas bahan baku segar merupakan fondasi utama keberhasilan operasional harian. CV Green Fresh Cipanas memahami tantangan besar yang dihadapi oleh para pengelola Flight Catering, Hotel, & Food Court Mall dalam mendapatkan pasokan sayur mayur yang konsisten dan berkualitas tinggi. Dengan mengandalkan hasil panen langsung dari lahan pertanian subur di dataran tinggi Cipanas, kami hadir sebagai mitra strategis yang menjembatani kebutuhan sayuran segar dengan efisiensi logistik yang tak tertandingi. Area layanan distribusi kami kini mencakup seluruh titik vital di Tangerang, mulai dari kawasan BSD, Karawaci, Gading Serpong, Alam Sutera, Bintaro, guna memastikan setiap dapur profesional menerima produk dengan standar kesegaran terbaik langsung dari sumbernya tanpa melalui banyak perantara.
+            </p>
+
+            <div class="mb-10">
+              <h3 class="text-2xl font-bold text-[#15803d] uppercase mb-4 tracking-tight">
+                Standar Kurasi Produk Sayur Terbaik untuk Flight Catering, Hotel, & Food Court Mall
+              </h3>
+              <p class="text-slate-600 leading-relaxed">
+                Kami menerapkan protokol Quality Control yang sangat ketat untuk memastikan setiap jenis komoditas memenuhi standar tinggi industri kuliner saat ini. Di wilayah Tangerang, kebutuhan akan supplier sayur tangerang, distributor sayur bsd, supply katering penerbangan menuntut ketelitian yang sangat tinggi, mulai dari tahap sortasi manual hingga pengemasan akhir yang aman. Produk sayuran hijau kami dipanen pada waktu yang paling optimal dan segera melalui proses pendinginan untuk menjaga tekstur renyah (crispy) dan kandungan nutrisi alaminya. Bagi mitra katering, hotel, hingga supermarket, kami menyediakan opsi kustomisasi potongan atau pembersihan (pre-cut) yang dirancang untuk mempercepat proses prapengolahan di dapur Anda. Dedikasi kami pada kualitas menjadikan kami sebagai pilihan utama bagi unit bisnis yang sangat mengutamakan kepuasan pelanggan dan tidak mentoleransi adanya rejection rate yang tinggi pada setiap pengiriman barang.
+              </p>
+            </div>
+
+            <div class="mb-10">
+              <h3 class="text-2xl font-bold text-[#15803d] uppercase mb-4 tracking-tight">
+                Infrastruktur Logistik Modern dan Fleksibilitas Kerjasama Perusahaan
+              </h3>
+              <p class="text-slate-600 leading-relaxed">
+                Kelancaran operasional harian bisnis Anda di Tangerang sangat bergantung pada ketepatan waktu distribusi. Dengan dukungan infrastruktur Standar Audit Keamanan Pangan Ketat, armada distribusi kami bergerak setiap subuh untuk menembus jalur-jalur sibuk di Tangerang guna memastikan barang tiba sebelum puncak aktivitas dapur dimulai. Selain keunggulan pada sisi logistik, Green Fresh menawarkan skema kerjasama profesional berupa sistem pembayaran tempo atau Term of Payment (TOP) hingga 30 hari. Skema ini dirancang khusus untuk mendukung kesehatan arus kas korporasi dan memberikan fleksibilitas finansial yang lebih baik bagi para mitra. Kami juga menjamin transparansi administrasi secara menyeluruh dengan status pengusaha kena pajak (PKP) resmi serta penyediaan faktur pajak elektronik, sehingga sangat memudahkan proses audit internal dan manajemen keuangan bagi perusahaan mitra di seluruh wilayah Tangerang.
+              </p>
+            </div>
+
+            <div class="mt-12 p-8 bg-[#f7faf7] rounded-3xl border-2 border-green-100 italic text-slate-700">
+              Memilih CV Green Fresh Cipanas berarti Anda sedang berinvestasi pada stabilitas stok dan konsistensi kualitas rasa pada setiap sajian menu Anda. Kami berkomitmen penuh untuk terus menjadi pilar pendukung bagi pertumbuhan industri restoran, hotel, supermarket, dan unit katering di Tangerang dengan menyediakan pasokan sayur mayur yang stabil sepanjang tahun, bahkan di tengah tantangan cuaca ekstrem. Jangan ragu untuk segera menghubungi tim pemasaran kami guna mendiskusikan draf skema suplai yang paling efisien dan menguntungkan bagi pertumbuhan bisnis kuliner Anda hari ini.
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <div class="py-10 reveal-up">
+        <div class="max-w-[1800px] mx-auto px-6">
+          <CityClientPage city={city} vegetableData={vegetableData} />
+        </div>
+      </div>
+
+      <section class="py-20 bg-slate-50 border-t border-green-100">
+        <div class="max-w-[1800px] mx-auto px-6">
+          <div class="mb-12">
+            <h3 class="text-xs font-black text-[#166534] uppercase tracking-[0.4em] flex items-center gap-3">
+              <MapPin size={14} /> Jangkauan Kami
+            </h3>
+
+            <h2 class="text-3xl font-black uppercase text-[#052c17]">
+              Area Sekitar {city.name}
+            </h2>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {otherCities.map((otherCity) => (
+              <a href={`/kota/${otherCity.slug}`} class="group p-6 rounded-2xl border bg-white hover:bg-green-50 transition text-center">
+                <span class="text-xs font-black uppercase tracking-wider group-hover:text-[#166534]">
+                  {otherCity.name}
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+  </div>
+</MainLayout>
+
+<style>
+.reveal-up {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all .8s cubic-bezier(.16,1,.3,1);
+}
+</style>

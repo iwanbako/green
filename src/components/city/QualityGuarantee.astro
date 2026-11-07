@@ -1,0 +1,82 @@
+---
+/**
+ * QUALITY GUARANTEE - GOJEK STYLE (Clean, Compact & Dark Mode)
+ * Strategi: Menggunakan grid statis di mobile agar tidak "kebesaran" dan layout yang bersih.
+ */
+import { RotateCcw, CheckSquare, BadgeCheck, Zap } from 'lucide-react';
+
+const items = [
+  { id: 'return', icon: RotateCcw, title: "Instant Return", desc: "Tukar di tempat jika tak sesuai." },
+  { id: 'qc', icon: CheckSquare, title: "Daily QC", desc: "Sortasi manual setiap subuh." },
+  { id: 'price', icon: BadgeCheck, title: "Price Guard", desc: "Harga kontrak flat 30 hari." },
+  { id: 'logistics', icon: Zap, title: "Express", desc: "Armada pendingin standar B2B." }
+];
+---
+
+<section class="py-16 md:py-20 bg-[#0b130f] font-sans text-left border-y border-emerald-900/40 reveal-container">
+  <div class="max-w-[1200px] mx-auto px-5">
+    
+    <div class="mb-10 text-left">
+      <h2 class="text-2xl md:text-4xl font-black text-white tracking-tight uppercase leading-none">
+        Jaminan <span class="text-emerald-400">Kualitas</span>
+      </h2>
+      <p class="text-emerald-300 text-xs md:text-sm font-bold mt-2 uppercase tracking-widest">
+        Standar operasional Green Fresh Cipanas
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+      {items.map((item) => (
+        <div class="group flex flex-col items-start p-5 md:p-8 rounded-3xl bg-[#121f18] border border-emerald-800/50 transition-all hover:bg-[#17281f] hover:border-emerald-500 hover:shadow-xl reveal-up">
+          <div class="w-10 h-10 md:w-14 md:h-14 rounded-2xl bg-[#17281f] border border-emerald-800/60 flex items-center justify-center text-emerald-400 shadow-sm mb-4 group-hover:bg-emerald-500 group-hover:text-[#0b130f] group-hover:border-emerald-400 transition-all">
+            <item.icon size={20} class="md:w-7 md:h-7" strokeWidth={2.5} />
+          </div>
+          
+          <div class="space-y-1 md:space-y-2">
+            <h3 class="font-black text-[13px] md:text-lg text-white leading-tight group-hover:text-emerald-300 transition-colors">
+              {item.title}
+            </h3>
+            <p class="text-[10px] md:text-sm text-slate-400 font-medium leading-relaxed">
+              {item.desc}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="mt-10 pt-6 border-t border-emerald-900/60 flex items-center gap-3 opacity-80">
+      <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+      <span class="text-[9px] font-black text-emerald-300 uppercase tracking-[0.2em]">B2B Certified Supplier Standard</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reveal-container .reveal-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  :global(.is-visible) .reveal-up {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const setupObserver = () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+  };
+
+  setupObserver();
+  document.addEventListener('astro:after-swap', setupObserver);
+</script>

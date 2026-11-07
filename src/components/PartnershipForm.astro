@@ -1,0 +1,146 @@
+---
+/**
+ * PARTNERSHIP FORM - ASTRO VERSION (Full-Width & Light Mode / Clean Layout)
+ */
+import { 
+  ShieldCheck, 
+  CheckCircle2, 
+  Send, 
+  Lock, 
+  Briefcase, 
+  ChevronDown 
+} from 'lucide-react';
+
+const { id = "kemitraan" } = Astro.props;
+const contactVisualUrl = "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1200";
+
+const features = [
+  { title: "Dukungan Arus Kas (TOP 7 Hari)", icon: Briefcase },
+  { title: "Kepastian Harga Kontrak", icon: ShieldCheck }
+];
+---
+
+<section id={id} class="w-full py-16 md:py-24 bg-white font-sans overflow-hidden text-left border-t border-slate-100 reveal-container">
+  <div class="w-full max-w-none bg-white border-y border-green-100 shadow-xl overflow-hidden">
+    
+    <div class="grid lg:grid-cols-12 items-stretch">
+      
+      <!-- Sisi Kiri: Visual & Informasi -->
+      <div class="lg:col-span-5 relative min-h-[350px] md:min-h-[450px] lg:min-h-full bg-[#052c17] flex flex-col justify-end p-8 md:p-16 lg:p-20">
+        <div class="absolute inset-0 z-0">
+          <img 
+            src={contactVisualUrl} 
+            class="w-full h-full object-cover opacity-50" 
+            alt="Produk CV Green Fresh Cipanas"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-[#052c17] via-[#052c17]/40 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 space-y-6 md:space-y-8">
+          <div class="space-y-4 md:space-y-6">
+            <div class="flex items-center gap-3 reveal-left">
+              <div class="p-2 bg-white/10 backdrop-blur-md rounded-lg text-green-300 border border-white/20">
+                <Lock size={14} />
+              </div>
+              <span class="text-[10px] font-black uppercase tracking-[0.2em] text-green-300">B2B Partnership</span>
+            </div>
+            
+            <h2 class="text-3xl md:text-5xl font-black text-white leading-tight tracking-tighter uppercase reveal-up">
+              Sistem Suplai <br /> 
+              <span class="text-green-300 italic font-serif lowercase tracking-normal">Terintegrasi.</span>
+            </h2>
+            
+            <p class="text-sm md:text-base text-slate-200 font-medium leading-relaxed max-w-md border-l-4 border-green-400 pl-4 md:pl-6 reveal-up">
+              Fasilitasi pengadaan sayur Grade A untuk korporasi dengan dukungan legalitas lengkap dan kepastian stok harian.
+            </p>
+          </div>
+
+          <div class="grid gap-3 md:gap-4 max-w-sm">
+            {features.map((item) => (
+              <div class="flex items-center gap-3 p-4 bg-white/10 backdrop-blur-xl rounded-2xl border border-white/15 reveal-up">
+                <div class="text-green-300"><item.icon size={16} /></div>
+                <h3 class="text-[10px] md:text-[11px] font-black uppercase tracking-widest text-white">{item.title}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Sisi Kanan: Form Inquiry (Full Width, Luas & Terang) -->
+      <div class="lg:col-span-7 bg-[#fcfdfc] p-8 md:p-16 lg:p-24 relative flex flex-col justify-center border-l border-green-50">
+        <div class="relative z-10 text-left max-w-2xl">
+          <div class="mb-8 md:mb-10">
+            <h3 class="text-2xl md:text-4xl font-black text-[#052c17] uppercase tracking-tighter">Inquiry Form</h3>
+            <p class="text-xs text-[#15803d] font-bold mt-2 tracking-wider uppercase">Respon Resmi dalam 1x24 Jam</p>
+          </div>
+
+          <form id="partnership-form" class="grid gap-6 md:gap-8">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div class="space-y-2">
+                <label for="company" class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Nama Perusahaan</label>
+                <input 
+                  id="company" name="company" type="text" required
+                  class="w-full bg-white border-2 border-slate-200 rounded-2xl px-5 py-4 text-sm font-bold text-[#052c17] focus:border-[#15803d] outline-none transition-all shadow-sm placeholder:text-slate-400" 
+                  placeholder="Hotel / Resto / Cafe"
+                />
+              </div>
+              <div class="space-y-2">
+                <label for="volume" class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Volume per Hari</label>
+                <input 
+                  id="volume" name="volume" type="text" required
+                  class="w-full bg-white border-2 border-slate-200 rounded-2xl px-5 py-4 text-sm font-bold text-[#052c17] focus:border-[#15803d] outline-none transition-all shadow-sm placeholder:text-slate-400" 
+                  placeholder="Estimasi Kg / Hari"
+                />
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <label for="termin" class="text-[10px] font-black text-slate-500 uppercase tracking-widest ml-1">Termin Pembayaran (TOP)</label>
+              <div class="relative">
+                <select 
+                  id="termin" name="termin" required
+                  class="w-full bg-white border-2 border-slate-200 rounded-2xl px-5 py-4 text-sm font-bold text-[#052c17] focus:border-[#15803d] outline-none transition-all appearance-none cursor-pointer shadow-sm"
+                >
+                  <option value="">Pilih Skema Termin</option>
+                  <option value="COD">Cash on Delivery (COD)</option>
+                  <option value="TOP 7">Term of Payment 7 Hari</option>
+                </select>
+                <ChevronDown class="absolute right-5 top-1/2 -translate-y-1/2 text-[#15803d] pointer-events-none" size={18} />
+              </div>
+            </div>
+
+            <button 
+              type="submit"
+              class="w-full bg-[#052c17] text-white py-5 rounded-2xl font-black uppercase text-xs tracking-[0.2em] hover:bg-[#15803d] transition-all shadow-xl flex items-center justify-center gap-3 mt-2 cursor-pointer"
+            >
+              KIRIM INQUIRY
+              <Send size={16} />
+            </button>
+
+            <div class="flex items-center justify-center gap-2 opacity-70 mt-4">
+              <CheckCircle2 size={14} class="text-[#15803d]" />
+              <p class="text-[9px] font-black uppercase tracking-widest text-slate-500">Data korporasi terenkripsi & aman</p>
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<style>
+  .reveal-container .reveal-up,
+  .reveal-container .reveal-left {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal-up { transform: translateY(20px); }
+  .reveal-left { transform: translateX(-20px); }
+
+  :global(.is-visible) .reveal-up,
+  :global(.is-visible) .reveal-left {
+    opacity: 1;
+    transform: translate(0);
+  }
+</style>

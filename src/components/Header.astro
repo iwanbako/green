@@ -1,0 +1,198 @@
+---
+/**
+ * HEADER COMPONENT - ASTRO VERSION
+ * Perbaikan: Ticker updated to 7 hari fixed price contract.
+ */
+import { 
+  Menu, X, MapPin, Phone, 
+  ChevronRight, Leaf, Pause, Play, 
+  Building2, ShoppingBag, Globe, ShieldCheck 
+} from 'lucide-react';
+
+const waNumber = "6287780937884";
+const waText = "Halo Green Fresh, saya ingin melakukan pemesanan sayuran. Mohon informasi stok harian dan prosedur order untuk wilayah saya. Terima kasih.";
+const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`;
+
+const tickerItems = [
+  "FIXED PRICE KONTRAK 7 HARI",
+  "SUPPLY CHAIN STANDAR AUDIT PANGAN",
+  "KOMITMEN ZERO REJECTION RATE",
+  "STABILITAS STOK SKALA TONASE",
+  "PEMBAYARAN TOP (TERM OF PAYMENT)",
+  "LEGALITAS SKU LENGKAP & PAJAK"
+];
+
+const navItems = [
+  { label: 'Katalog', href: '/produk', icon: ShoppingBag },
+  { label: 'Kota', href: '/kota', icon: MapPin },
+  { label: 'Area', href: '/area', icon: Globe },
+  { label: 'Gallery', href: '/gallery', icon: null },
+  { label: 'About', href: '/about', icon: null },
+];
+
+const mobileNavItems = [
+  { label: 'Home', href: '/', icon: Leaf },
+  { label: 'Katalog Produk', href: '/produk', icon: ShoppingBag },
+  { label: 'Indeks Kota', href: '/kota', icon: MapPin },
+  { label: 'Cakupan Area', href: '/area', icon: Globe },
+  { label: 'Quality Gallery', href: '/gallery', icon: ShieldCheck },
+  { label: 'Tentang Kami', href: '/about', icon: Building2 },
+];
+---
+
+<header role="banner" class="relative font-sans text-left">
+  <div id="top-ticker" class="fixed top-0 left-0 right-0 z-[110] bg-[#052c17] text-slate-200 h-9 flex items-center border-b border-green-900/50 transition-transform duration-300">
+    <div class="max-w-7xl mx-auto w-full px-6 flex items-center overflow-hidden">
+      <button id="ticker-toggle" class="mr-4 opacity-40 hover:opacity-100 transition-opacity flex-shrink-0" aria-label="Pause ticker">
+        <span id="pause-icon"><Pause size={10} fill="currentColor" /></span>
+        <span id="play-icon" class="hidden"><Play size={10} fill="currentColor" /></span>
+      </button>
+      
+      <div class="flex whitespace-nowrap overflow-hidden flex-1 relative items-center">
+        <div id="ticker-content" class="flex items-center gap-12 text-[9px] font-bold uppercase tracking-[0.2em] animate-marquee text-white/70">
+          {Array.from({ length: 4 }).map(() => (
+            <div class="flex items-center gap-12">
+              {tickerItems.map((text) => (
+                <span class="flex items-center gap-4">
+                  <span class="w-1 h-1 bg-green-500 rounded-full flex-shrink-0" />
+                  {text}
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="hidden md:flex items-center gap-3 ml-6 pl-6 border-l border-white/10 text-[10px] font-semibold flex-shrink-0">
+        <Phone size={12} class="text-green-400" />
+        <a href={waLink} target="_blank" rel="noopener noreferrer" class="hover:text-green-400 transition-colors uppercase tracking-widest text-white/80">
+          Order Hotline
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <nav id="main-nav" class="fixed left-0 right-0 z-[100] top-9 bg-[#fcfdfc] py-4 border-b-2 border-green-100 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      
+      <a href="/" class="flex items-center gap-3 group outline-none">
+        <div class="w-11 h-11 bg-[#15803d] rounded-xl flex items-center justify-center transition-all group-hover:bg-[#166534] shadow-md border-2 border-green-200/50">
+          <Leaf class="text-white w-6 h-6" fill="currentColor" />
+        </div>
+        <div class="flex flex-col">
+          <span class="text-xl font-bold tracking-tighter text-[#052c17] leading-none uppercase">
+            Green<span class="text-green-600">Fresh</span>
+          </span>
+          <span class="text-[8px] font-black uppercase tracking-[0.3em] text-green-700/60 mt-0.5">Supplier Sayur </span>
+        </div>
+      </a>
+
+      <div class="hidden lg:flex items-center gap-1">
+        {navItems.map((item) => (
+          <a href={item.href} class="px-5 py-2 text-[10px] font-bold uppercase tracking-widest text-slate-600 hover:text-[#15803d] hover:bg-white border border-transparent hover:border-green-100 rounded-full transition-all flex items-center gap-2 group/nav">
+            {item.icon && <span class="opacity-30 group-hover/nav:opacity-100"><item.icon size={14} /></span>}
+            {item.label}
+          </a>
+        ))}
+      </div>
+
+      <div class="flex items-center gap-4">
+        <a href={waLink} target="_blank" rel="noopener noreferrer" class="hidden md:flex items-center gap-2 bg-[#052c17] text-white px-7 py-3 rounded-full text-[9px] font-bold uppercase tracking-widest hover:bg-[#15803d] transition-all shadow-lg border-2 border-green-800 active:scale-95">
+           Pesan Sekarang
+        </a>
+        
+        <button id="mobile-menu-toggle" class="lg:hidden p-2 text-[#052c17] bg-white hover:bg-green-50 rounded-xl transition-colors border-2 border-green-100">
+          <Menu size={22} />
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="mobile-menu-overlay" class="fixed inset-0 z-[120] bg-[#f8faf8] lg:hidden flex flex-col translate-x-full transition-transform duration-500 ease-in-out">
+    <div class="p-6 flex items-center justify-between border-b-4 border-green-100 bg-white">
+      <span class="text-xs font-black uppercase tracking-[0.4em] text-green-800">Cakupan Navigasi</span>
+      <button id="mobile-menu-close" class="p-2 bg-slate-100 rounded-xl border border-slate-200 text-slate-500">
+        <X size={20} />
+      </button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-6 space-y-3">
+      {mobileNavItems.map((item) => (
+        <a href={item.href} class="flex items-center justify-between p-5 bg-white rounded-2xl text-[11px] font-bold text-[#052c17] uppercase tracking-wider transition-all border-2 border-green-50 hover:border-green-200 shadow-sm">
+          <div class="flex items-center gap-4 text-left">
+            <span class="p-2 bg-green-50 rounded-lg text-[#15803d] border border-green-100">
+              <item.icon size={18} />
+            </span>
+            {item.label}
+          </div>
+          <ChevronRight size={16} class="text-slate-300" />
+        </a>
+      ))}
+    </div>
+    <div class="p-8 bg-white border-t-2 border-green-100">
+       <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest text-center">Standardized B2B Procurement 2026</p>
+    </div>
+  </div>
+</header>
+
+<style>
+  .animate-marquee { display: inline-flex; animation: marquee 60s linear infinite; }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .paused { animation-play-state: paused !important; }
+
+  .nav-scrolled { 
+    top: 0 !important; 
+    background-color: rgba(255, 255, 255, 0.98) !important; 
+    border-bottom: 2px solid #15803d !important;
+    box-shadow: 0 15px 30px -15px rgba(5, 44, 23, 0.15); 
+    padding-top: 0.6rem !important; 
+    padding-bottom: 0.6rem !important; 
+  }
+  .ticker-hidden { transform: translateY(-100%); }
+</style>
+
+<script>
+  // Logika Interaktif
+  const nav = document.getElementById('main-nav');
+  const ticker = document.getElementById('top-ticker');
+  const tickerContent = document.getElementById('ticker-content');
+  const tickerToggle = document.getElementById('ticker-toggle');
+  const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+  const mobileMenuClose = document.getElementById('mobile-menu-close');
+  const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+  // Efek Scroll
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      nav?.classList.add('nav-scrolled');
+      ticker?.classList.add('ticker-hidden');
+    } else {
+      nav?.classList.remove('nav-scrolled');
+      ticker?.classList.remove('ticker-hidden');
+    }
+  }, { passive: true });
+
+  // Ticker Play/Pause
+  tickerToggle?.addEventListener('click', () => {
+    const isPaused = tickerContent?.classList.toggle('paused');
+    document.getElementById('pause-icon')?.classList.toggle('hidden', isPaused);
+    document.getElementById('play-icon')?.classList.toggle('hidden', !isPaused);
+  });
+
+  // Logika Buka/Tutup Menu Mobile
+  const toggleMenu = (isOpen: boolean) => {
+    if (isOpen) {
+      mobileMenuOverlay?.classList.remove('translate-x-full');
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileMenuOverlay?.classList.add('translate-x-full');
+      document.body.style.overflow = '';
+    }
+  };
+
+  mobileMenuToggle?.addEventListener('click', () => toggleMenu(true));
+  mobileMenuClose?.addEventListener('click', () => toggleMenu(false));
+
+  mobileMenuOverlay?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => toggleMenu(false));
+  });
+</script>

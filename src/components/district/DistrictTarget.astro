@@ -1,0 +1,102 @@
+---
+/**
+ * DISTRICT TARGET - ASTRO VERSION (SEO Optimized & Dark Mode)
+ * Strategi: Zero Hydration untuk Kejelasan Segmen Pasar bagi Googlebot.
+ */
+import { 
+  ArrowUpRight, Building, Coffee, Utensils, 
+  Hotel, Home, Store, Users, Briefcase 
+} from 'lucide-react';
+
+const { district } = Astro.props;
+
+// Fungsi helper untuk mendapatkan ikon di sisi server (Build Time)
+const getIconInfo = (clientType: string, index: number) => {
+  const type = clientType.toLowerCase();
+  if (type.includes('restoran') || type.includes('dining')) return Utensils;
+  if (type.includes('cafe') || type.includes('coffee')) return Coffee;
+  if (type.includes('hotel')) return Hotel;
+  if (type.includes('warung') || type.includes('rumah makan')) return Home;
+  if (type.includes('mall') || type.includes('store')) return Store;
+  if (type.includes('catering') || type.includes('corporate') || type.includes('office')) return Briefcase;
+  
+  const defaultIcons = [Building, Coffee, Utensils, Hotel, Home, Store, Users, Briefcase];
+  return defaultIcons[index % defaultIcons.length];
+};
+
+const colorVariants = [
+  { bg: 'bg-emerald-950/40', text: 'text-emerald-400', border: 'border-emerald-800/60', accent: 'bg-emerald-500' },
+  { bg: 'bg-green-950/40', text: 'text-green-400', border: 'border-green-800/60', accent: 'bg-green-500' },
+  { bg: 'bg-teal-950/40', text: 'text-teal-400', border: 'border-teal-800/60', accent: 'bg-teal-500' },
+  { bg: 'bg-lime-950/40', text: 'text-lime-400', border: 'border-lime-800/60', accent: 'bg-lime-500' },
+  { bg: 'bg-cyan-950/40', text: 'text-cyan-400', border: 'border-cyan-800/60', accent: 'bg-cyan-500' },
+  { bg: 'bg-amber-950/40', text: 'text-amber-400', border: 'border-amber-800/60', accent: 'bg-amber-500' }
+];
+
+const clients = district?.clientFocus?.split(', ') || [];
+---
+
+<section class="py-16 md:py-24 bg-[#0b130f] font-sans text-left border-y border-emerald-900/40 reveal-container">
+  <div class="max-w-7xl mx-auto px-6">
+    
+    <!-- Header Section -->
+    <div class="mb-12 md:mb-16 text-center max-w-3xl mx-auto">
+      <div class="space-y-4">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-950/80 border border-emerald-800/60 rounded-full reveal-up">
+          <div class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></div>
+          <span class="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-400">Client Segments</span>
+        </div>
+        
+        <h2 class="text-3xl md:text-5xl font-[1000] text-white tracking-tight leading-tight uppercase reveal-up">
+          Spesialisasi <span class="text-emerald-400">Layanan.</span>
+        </h2>
+        
+        <p class="text-sm md:text-base text-slate-300 font-medium reveal-up leading-relaxed" style="transition-delay: 0.1s;">
+          Fokus melayani berbagai segmen bisnis kuliner profesional di wilayah <span class="font-bold text-emerald-300">{district?.name || 'jangkauan'}</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Client Cards Grid (Responsif HP: 1 Kolom agar tidak gepeng, Tablet: 2 Kolom, Desktop: 4 Kolom) -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {clients.map((client, index) => {
+        const colors = colorVariants[index % colorVariants.length];
+        const IconComponent = getIconInfo(client, index);
+
+        return (
+          <div
+            class={`group relative rounded-3xl transition-all duration-300 bg-[#17281f] border ${colors.border} shadow-sm hover:shadow-xl hover:shadow-emerald-900/20 hover:-translate-y-1 hover:border-emerald-600/60 overflow-hidden flex flex-col justify-between reveal-up`}
+            style={`transition-delay: ${index * 0.05}s;`}
+          >
+            <div class="p-6 md:p-8 flex flex-col flex-1 relative z-10">
+              <div class="flex items-start justify-between mb-6">
+                <div class={`p-3.5 rounded-2xl ${colors.bg} ${colors.text} border ${colors.border} group-hover:bg-emerald-500 group-hover:text-[#0b130f] group-hover:border-emerald-400 transition-all duration-300`}>
+                  <IconComponent size={22} />
+                </div>
+                <span class="text-2xl md:text-3xl font-black text-emerald-900/40 group-hover:text-emerald-500 transition-colors">
+                  0{index + 1}
+                </span>
+              </div>
+
+              <div class="space-y-3 flex-1">
+                <h3 class="text-base md:text-lg font-black leading-snug text-white uppercase group-hover:text-emerald-400 transition-colors">
+                  {client}
+                </h3>
+                
+                <div class={`h-1 w-10 rounded-full ${colors.accent}`} />
+                
+                <p class="text-xs md:text-sm leading-relaxed font-medium text-slate-400">
+                  {`Supply chain khusus untuk pengadaan komoditas ${client.toLowerCase()} dengan standar kualitas B2B harian.`}
+                </p>
+              </div>
+
+              <div class="mt-6 pt-4 border-t border-emerald-800/50 flex items-center justify-between">
+                <span class={`text-[10px] font-black uppercase tracking-widest ${colors.text}`}>
+                  Expert Support
+                </span>
+                <ArrowUpRight size={18} class="text-slate-500 group-hover:text-emerald-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+              </div>
+            </div>
+          </div>
+        );
+      })}
