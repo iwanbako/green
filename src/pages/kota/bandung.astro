@@ -1,0 +1,717 @@
+---
+/**
+ * Kota: Bandung
+ * Mode: SSG — Unique Content + Product Slider + Contact Form
+ */
+
+export const prerender = true;
+
+import MainLayout from '@/layouts/MainLayout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import CityHero from '@/components/city/CityHero.astro';
+import {
+  MapPin,
+  Truck,
+  Clock,
+  Factory,
+  ChefHat,
+  ShieldCheck,
+  Store,
+  Building2,
+  CheckCircle2,
+  Leaf,
+  Send,
+  CalendarClock,
+} from 'lucide-react';
+
+const city = {
+  slug: 'bandung',
+  name: 'Bandung',
+  title: 'Distributor Sayur Bandung | Agen Grosir Sayuran Segar',
+  angle:
+    'Solusi grosir sayur untuk katering, hotel, dan bisnis kuliner di Bandung. Harga kompetitif dengan legalitas PKP.',
+  seoContent:
+    'Kami melayani kebutuhan sayuran untuk Bandung dari Andir hingga Cibiru. Cocok bagi pengusaha katering dan restoran yang membutuhkan supplier konsisten dengan dukungan administrasi pajak yang transparan.',
+  clientFocus: 'Katering, Hotel, Restoran, & Rumah Sakit Bandung',
+  deliveryRoute:
+    'Distribusi rutin via jalur utama Bandung untuk efisiensi logistik.',
+  usp: 'Harga petani dengan jaminan stok 365 hari (Anti-Kelangkaan).',
+  logistics: [
+    {
+      time: '19:00',
+      title: 'Wholesale Packing',
+      desc: 'Pengepakan standar grosir untuk area Bandung.',
+    },
+    {
+      time: '00:30',
+      title: 'West Java Logistics Way',
+      desc: 'Pengiriman subuh via jalur utama menuju Bandung.',
+    },
+    {
+      time: '04:30',
+      title: 'Business Unit Drop',
+      desc: 'Distribusi ke titik-titik operasional mitra Bandung.',
+    },
+  ],
+};
+
+const title = `Supplier Sayur ${city.name} untuk Katering, Hotel, & Rumah Sakit | CV Green Fresh Cipanas`;
+const description = `Distributor sayuran segar di ${city.name} dengan pengiriman subuh, harga grosir, dan legalitas PKP. Termin pembayaran 7 hari untuk klien baru. Melayani ${city.clientFocus} di seluruh area ${city.name}.`;
+
+const waNumber = '6287780937884';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Service',
+      name: `Supplier Sayur Segar ${city.name}`,
+      provider: {
+        '@type': 'LocalBusiness',
+        name: 'CV Green Fresh Cipanas',
+      },
+      areaServed: {
+        '@type': 'City',
+        name: city.name,
+      },
+      description: description,
+    },
+  ],
+};
+
+// Nearby cities untuk Bandung
+const otherCities = [
+  { name: 'Cimahi', slug: 'cimahi' },
+  { name: 'Lembang', slug: 'lembang' },
+  { name: 'Soreang', slug: 'soreang' },
+  { name: 'Padalarang', slug: 'padalarang' },
+  { name: 'Sumedang', slug: 'sumedang' },
+  { name: 'Garut', slug: 'garut' },
+];
+
+const bandungZones = [
+  { name: 'Andir', note: 'Katering hajatan & warung tenda malam' },
+  { name: 'Antapani', note: 'Restoran keluarga & kedai kopi' },
+  { name: 'Arcamanik', note: 'Hotel bisnis & kantin perkantoran' },
+  { name: 'Buahbatu', note: 'Pasar tradisional & grosir sayur' },
+  { name: 'Cibiru', note: 'Katering kampus & mess mahasiswa' },
+  { name: 'Coblong', note: 'Cafe & restoran kekinian' },
+  { name: 'Kiaracondong', note: 'Katering harian & catering rumahan' },
+  { name: 'Lengkong', note: 'Hotel bintang & restoran fine dining' },
+  { name: 'Regol', note: 'Cafe & kuliner street food' },
+  { name: 'Sukajadi', note: 'Hotel & restoran keluarga' },
+  { name: 'Sumur Bandung', note: 'Restoran heritage & cafe' },
+  { name: 'Cidadap', note: 'Villa & guest house kawasan Dago' },
+];
+
+const bandungIndustri = [
+  { name: 'Kawasan Industri Cimareme', note: 'Kantin pabrik & mess karyawan butuh supply stabil harian' },
+  { name: 'Kawasan Industri Leuwigajah', note: 'Katering industri & meeting room F&B di kawasan ini' },
+  { name: 'Kawasan Industri Dayeuhkolot', note: 'Kantin operator shift malam butuh sayur pre-cut' },
+  { name: 'Kawasan Industri Rancaekek', note: 'Restoran keluarga & hotel bisnis koridor Bandung Timur' },
+];
+
+const bandungClientTypes = [
+  {
+    icon: ChefHat,
+    title: 'Katering Hajatan & Restoran',
+    desc: 'Butuh volume besar dalam waktu singkat. Kami kirim subuh, sebelum tim dapur mulai menumis.',
+  },
+  {
+    icon: Building2,
+    title: 'Hotel, Villa & Guest House',
+    desc: 'Menu breakfast buffet dan fine dining butuh sayur bersih, sortir, dan pre-cut. Hotel jadi prioritas pengiriman pertama.',
+  },
+  {
+    icon: Factory,
+    title: 'Kantin Kampus & Perkantoran',
+    desc: 'Bandung adalah kota pelajar. Kantin kampus ITB, Unpad, dan perkantoran butuh pasokan nonstop setiap hari kerja.',
+  },
+  {
+    icon: Store,
+    title: 'Warung, Cafe & UMKM Kuliner',
+    desc: 'Cafe dan warung tenda malam butuh sayur fresh harian. Minimum order ramah UMKM.',
+  },
+];
+
+const bandungLegal = [
+  'Faktur pajak elektronik resmi (PKP) untuk kebutuhan audit internal.',
+  'Termin pembayaran 7 hari (Net 7) untuk klien baru.',
+  'Term of Payment (TOP) hingga 30 hari untuk klien kontrak rutin.',
+  'Surat jalan dan berita acara penerimaan untuk setiap pengiriman.',
+];
+
+const vegetables = [
+  {
+    name: 'Brokoli Hijau',
+    desc: 'Grade A, kuntum rapat, cocok untuk hotel & western food.',
+    img: 'https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Selada Romaine',
+    desc: 'Daun utuh, crispy. Favorit buffet breakfast & salad bar.',
+    img: 'https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Tomat Merah',
+    desc: 'Matang pohon, tidak lembek. Cocok untuk saus & salad.',
+    img: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Wortel Brastagi',
+    desc: 'Manis alami, warna oranye cerah. Cocok sup & tumis.',
+    img: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Bayam Hijau',
+    desc: 'Daun lebar, batang muda. Ideal untuk menu anak & pasien.',
+    img: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Kubis Hijau',
+    desc: 'Padat, berlapis rapi. Cocok untuk katering volume besar.',
+    img: 'https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Paprika Merah',
+    desc: 'Tebal, manis. Untuk plating resto & menu kontinental.',
+    img: 'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Buncis Muda',
+    desc: 'Renyah, tanpa serat kasar. Favorit tumis resto Sunda.',
+    img: 'https://images.unsplash.com/photo-1567375698348-5d9d5ae99de0?w=600&q=80&auto=format&fit=crop',
+  },
+];
+---
+
+<MainLayout title={title} description={description}>
+  <script
+    type="application/ld+json"
+    slot="head"
+    set:html={JSON.stringify(jsonLd)}
+  />
+
+  <div class="bg-white text-[#052c17] font-sans antialiased overflow-x-hidden">
+    <Header />
+    <CityHero city={city} />
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8 sm:space-y-10">
+
+      <!-- ============ SECTION 1: INTRO ============ -->
+      <section>
+        <span class="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-[#166534] bg-green-50 border border-green-200 px-2.5 py-1 rounded-full mb-3">
+          <MapPin size={10} /> {city.name}, Jawa Barat
+        </span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-[#052c17] tracking-tight leading-tight mb-4">
+          Supplier Sayur {city.name} untuk Katering, Hotel & Kantin Kampus
+        </h2>
+        <div class="space-y-3 text-slate-700 leading-relaxed">
+          <p>
+            {city.angle} CV Green Fresh Cipanas paham ritme bisnis kuliner
+            Bandung yang dinamis: katering hajatan di Andir butuh
+            kiriman subuh sebelum jam 5 pagi, sementara hotel dan restoran
+            di kawasan Dago dan Lengkong butuh pasokan harian yang tidak boleh
+            putus. {city.deliveryRoute} {city.seoContent}
+          </p>
+          <p>
+            Kami fokus pada satu hal yang paling sering dilupakan supplier
+            besar: <strong>konsistensi harian</strong>. Bukan sekadar "bisa
+            kirim", tapi bisa kirim dengan kualitas yang sama di hari Senin
+            pagi maupun Jumat siang. {city.usp}
+          </p>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 2: SLIDER PRODUK ============ -->
+      <section>
+        <div class="flex items-end justify-between gap-3 mb-4">
+          <div class="min-w-0">
+            <h3 class="text-lg sm:text-xl font-bold text-[#052c17] flex items-center gap-2">
+              <Leaf size={18} class="text-[#166534]" /> Sayuran Segar yang Kami Suplai
+            </h3>
+            <p class="text-sm text-slate-600 mt-1">
+              Dipanen pagi, dikirim subuh, sampai dapur Anda sebelum jam 5.
+            </p>
+          </div>
+          <div class="hidden sm:flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              data-slider-prev
+              aria-label="Sebelumnya"
+              class="w-9 h-9 rounded-full border border-slate-300 bg-white hover:bg-green-50 hover:border-[#166534] active:scale-95 transition flex items-center justify-center text-[#052c17]"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button
+              type="button"
+              data-slider-next
+              aria-label="Berikutnya"
+              class="w-9 h-9 rounded-full border border-slate-300 bg-white hover:bg-green-50 hover:border-[#166534] active:scale-95 transition flex items-center justify-center text-[#052c17]"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="veggie-slider"
+          class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 scrollbar-hide scroll-smooth"
+        >
+          {vegetables.map((v) => (
+            <article class="snap-start shrink-0 w-[240px] sm:w-[260px] rounded-xl overflow-hidden border border-slate-200 bg-white hover:shadow-md hover:border-[#166534]/30 transition">
+              <div class="relative h-40 sm:h-44 bg-slate-100">
+                <img
+                  src={v.img}
+                  alt={v.name}
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-cover"
+                />
+                <span class="absolute top-2 left-2 text-[9px] font-black uppercase tracking-wider bg-white/95 text-[#166534] border border-green-200 px-2 py-0.5 rounded">
+                  Fresh
+                </span>
+              </div>
+              <div class="p-3">
+                <h4 class="font-bold text-sm text-[#052c17] mb-0.5">
+                  {v.name}
+                </h4>
+                <p class="text-[11px] text-slate-600 leading-snug">
+                  {v.desc}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <p class="text-[10px] text-slate-400 mt-2 text-center sm:hidden">
+          ← geser untuk lihat lainnya →
+        </p>
+      </section>
+
+      <!-- ============ SECTION 3: TIPE KLIEN ============ -->
+      <section>
+        <div class="mb-4">
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17]">
+            Tipe Klien di {city.name}
+          </h3>
+          <p class="text-sm text-slate-600 mt-1">
+            {city.clientFocus} — masing-masing punya pola order, jadwal, dan
+            jenis sayur favorit berbeda.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {bandungClientTypes.map((c) => (
+            <div class="flex items-start gap-3 p-4 rounded-xl border border-slate-200 border-l-4 border-l-[#166534] bg-white hover:bg-green-50/40 hover:shadow-sm transition">
+              <div class="w-9 h-9 rounded-lg bg-[#166534] text-white flex items-center justify-center shrink-0">
+                <c.icon size={16} />
+              </div>
+              <div class="min-w-0">
+                <h4 class="font-bold text-sm text-[#052c17] mb-1">
+                  {c.title}
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  {c.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ SECTION 4: KAWASAN + LOGISTIK (2 kolom) ============ -->
+      <section class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17] mb-3 flex items-center gap-2">
+            <Factory size={18} class="text-[#166534]" /> Kawasan Industri
+          </h3>
+          <p class="text-sm text-slate-600 mb-3">
+            Bandung dikelilingi kawasan industri yang butuh pasokan sayur
+            stabil. Kami sudah terbiasa melayani kantin pabrik dan mess
+            karyawan di:
+          </p>
+          <ul class="space-y-2">
+            {bandungIndustri.map((z) => (
+              <li class="flex items-start gap-2.5 p-3 rounded-lg bg-slate-50 border border-slate-100">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#166534] mt-2 shrink-0"></span>
+                <div>
+                  <strong class="text-sm text-[#052c17]">{z.name}</strong>
+                  <p class="text-xs text-slate-600 leading-snug mt-0.5">
+                    {z.note}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17] mb-3 flex items-center gap-2">
+            <Clock size={18} class="text-[#166534]" /> Timeline Distribusi Subuh
+          </h3>
+          <p class="text-sm text-slate-600 mb-3">
+            Jam 5 pagi adalah batas kritis. Berikut jadwal operasional kami:
+          </p>
+          <div class="space-y-2">
+            {city.logistics.map((l) => (
+              <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-200">
+                <div class="shrink-0 text-center">
+                  <span class="inline-block text-xs font-mono font-bold text-[#166534] bg-green-50 border border-green-200 rounded px-2 py-0.5">
+                    {l.time}
+                  </span>
+                </div>
+                <div>
+                  <strong class="text-sm text-[#052c17]">{l.title}</strong>
+                  <p class="text-xs text-slate-600 leading-snug mt-0.5">
+                    {l.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SECTION 5: LEGALITAS ============ -->
+      <section>
+        <h3 class="text-lg sm:text-xl font-bold text-[#052c17] mb-3 flex items-center gap-2">
+          <ShieldCheck size={18} class="text-[#166534]" /> Legalitas & Administrasi Perusahaan
+        </h3>
+        <div class="grid sm:grid-cols-2 gap-2.5">
+          {bandungLegal.map((item) => (
+            <div class="flex items-start gap-2.5 p-3 rounded-lg bg-green-50/60 border border-green-100">
+              <CheckCircle2 size={14} class="text-[#166534] mt-0.5 shrink-0" />
+              <span class="text-sm text-slate-700 leading-snug">{item}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ SECTION 6: ZONA KECAMATAN ============ -->
+      <section>
+        <div class="mb-3">
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17] flex items-center gap-2">
+            <MapPin size={18} class="text-[#166534]" /> Zona Pengiriman — 12 Kecamatan di {city.name}
+          </h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Jadwal dan minimum order disesuaikan dengan karakter tiap zona.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+          {bandungZones.map((z) => (
+            <div class="p-3 rounded-lg border border-slate-200 bg-white hover:border-[#166534] hover:bg-green-50/40 transition">
+              <div class="font-bold text-xs text-[#052c17] mb-0.5">
+                {z.name}
+              </div>
+              <div class="text-[11px] text-slate-600 leading-snug">
+                {z.note}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ SECTION 7: AREA SEKITAR ============ -->
+      <section>
+        <div class="mb-3">
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17] flex items-center gap-2">
+            <Truck size={18} class="text-[#166534]" /> Area Sekitar {city.name}
+          </h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Kami juga melayani kota-kota berikut dengan pola pengiriman yang
+            sama.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+          {otherCities.map((otherCity) => (
+            <a
+              href={`/kota/${otherCity.slug}`}
+              class="group p-3 rounded-lg border border-slate-200 bg-white hover:border-[#166534] hover:bg-green-50 transition text-center"
+            >
+              <span class="text-xs font-bold uppercase tracking-wide text-[#052c17] group-hover:text-[#166534]">
+                {otherCity.name}
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ SECTION 8: CONTACT FORM + TERMIN 7 HARI ============ -->
+      <section id="kontak" class="scroll-mt-20">
+        <div class="rounded-2xl border-2 border-[#166534] bg-gradient-to-br from-[#f0fdf4] to-white overflow-hidden">
+
+          <!-- Header form -->
+          <div class="p-5 sm:p-6 border-b-2 border-[#166534]/20 bg-[#166534]">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-lg bg-white/15 backdrop-blur flex items-center justify-center shrink-0">
+                <Send size={18} class="text-white" />
+              </div>
+              <div>
+                <h3 class="text-lg sm:text-xl font-bold text-white">
+                  Minta Penawaran Suplai {city.name}
+                </h3>
+                <p class="text-xs sm:text-sm text-green-100 mt-0.5">
+                  Isi form — tim kami balas via WhatsApp dalam 1×24 jam kerja.
+                </p>
+              </div>
+            </div>
+
+            <!-- Badge Termin 7 Hari -->
+            <div class="mt-4 inline-flex items-center gap-2 bg-yellow-300 text-[#052c17] border border-yellow-400 rounded-lg px-3 py-1.5">
+              <CalendarClock size={14} />
+              <span class="text-xs font-bold">
+                Termin Pembayaran 7 Hari untuk Klien Baru
+              </span>
+            </div>
+          </div>
+
+          <!-- Form body -->
+          <form
+            id="kontak-form"
+            class="p-5 sm:p-6 space-y-4"
+            data-wa={waNumber}
+            novalidate
+          >
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="nama" class="block text-xs font-bold text-[#052c17] mb-1">
+                  Nama Lengkap <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="nama"
+                  name="nama"
+                  required
+                  autocomplete="name"
+                  placeholder="Budi Santoso"
+                  class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+                />
+              </div>
+
+              <div>
+                <label for="usaha" class="block text-xs font-bold text-[#052c17] mb-1">
+                  Nama Usaha / Perusahaan <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="usaha"
+                  name="usaha"
+                  required
+                  autocomplete="organization"
+                  placeholder="Katering Berkah Jaya"
+                  class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="whatsapp" class="block text-xs font-bold text-[#052c17] mb-1">
+                  No. WhatsApp <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="whatsapp"
+                  name="whatsapp"
+                  required
+                  inputmode="numeric"
+                  pattern="[0-9+\s-]{8,18}"
+                  autocomplete="tel"
+                  placeholder="08xx xxxx xxxx"
+                  class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+                />
+              </div>
+
+              <div>
+                <label for="zona" class="block text-xs font-bold text-[#052c17] mb-1">
+                  Zona Pengiriman <span class="text-rose-500">*</span>
+                </label>
+                <select
+                  id="zona"
+                  name="zona"
+                  required
+                  class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+                >
+                  <option value="">— Pilih kecamatan —</option>
+                  {bandungZones.map((z) => (
+                    <option value={z.name}>{z.name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="kebutuhan" class="block text-xs font-bold text-[#052c17] mb-1">
+                Kebutuhan Sayur <span class="text-rose-500">*</span>
+              </label>
+              <textarea
+                id="kebutuhan"
+                name="kebutuhan"
+                required
+                rows="3"
+                placeholder="Contoh: Selada 20 kg/hari, Tomat 15 kg/hari, Wortel 10 kg/hari untuk buffet breakfast hotel."
+                class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition resize-y"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="volume" class="block text-xs font-bold text-[#052c17] mb-1">
+                Estimasi Volume Harian <span class="text-slate-400 font-normal">(opsional)</span>
+              </label>
+              <input
+                type="text"
+                id="volume"
+                name="volume"
+                placeholder="Contoh: ±50 kg per hari"
+                class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+              />
+            </div>
+
+            <!-- Checkbox termin 7 hari -->
+            <div class="p-3 rounded-lg bg-yellow-50 border border-yellow-200">
+              <label class="flex items-start gap-2.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  id="termin7"
+                  name="termin7"
+                  required
+                  class="mt-0.5 w-4 h-4 rounded border-slate-300 text-[#166534] focus:ring-[#166534]"
+                />
+                <span class="text-xs text-slate-700 leading-relaxed">
+                  Saya setuju dengan skema <strong>termin pembayaran 7 hari (Net 7)</strong> untuk transaksi pertama, dengan syarat & ketentuan yang berlaku.
+                </span>
+              </label>
+            </div>
+
+            <!-- Error message -->
+            <div
+              id="form-error"
+              class="hidden p-3 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700"
+              role="alert"
+            ></div>
+
+            <button
+              type="submit"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#166534] text-white font-bold text-sm hover:bg-[#14532d] active:scale-[0.98] transition shadow-md"
+            >
+              <Send size={16} /> Kirim via WhatsApp
+            </button>
+
+            <p class="text-[10px] text-slate-500 leading-relaxed">
+              Dengan mengirim form ini, Anda akan diarahkan ke WhatsApp kami
+              dengan pesan yang sudah terisi otomatis. Tim marketing akan
+              membalas dalam 1×24 jam kerja.
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============ CTA PENUTUP ============ -->
+      <section class="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-[#dcfce7] border-2 border-green-200">
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed italic">
+          Untuk bisnis kuliner Bandung, memilih supplier bukan soal harga
+          termurah — tapi soal siapa yang bisa hadir konsisten setiap subuh,
+          365 hari setahun. Kalau Anda mengelola katering, hotel, restoran,
+          atau kantin kampus di Bandung, isi form di atas atau hubungi tim
+          pemasaran kami untuk diskusi skema suplai yang paling efisien.
+        </p>
+      </section>
+
+    </main>
+
+    <Footer />
+  </div>
+</MainLayout>
+
+<script is:inline>
+  (function () {
+    // ---- Slider ----
+    const slider = document.getElementById('veggie-slider');
+    if (slider) {
+      const scrollAmount = 280;
+      document.querySelectorAll('[data-slider-prev]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+      });
+      document.querySelectorAll('[data-slider-next]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+      });
+    }
+
+    // ---- Contact Form -> WhatsApp ----
+    const form = document.getElementById('kontak-form');
+    if (!form) return;
+
+    const waNumber = form.getAttribute('data-wa') || '6281234567890';
+    const errorBox = document.getElementById('form-error');
+
+    function showError(msg) {
+      if (!errorBox) return;
+      errorBox.textContent = msg;
+      errorBox.classList.remove('hidden');
+    }
+
+    function hideError() {
+      if (!errorBox) return;
+      errorBox.classList.add('hidden');
+      errorBox.textContent = '';
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      hideError();
+
+      const nama = form.querySelector('#nama').value.trim();
+      const usaha = form.querySelector('#usaha').value.trim();
+      const whatsapp = form.querySelector('#whatsapp').value.trim();
+      const zona = form.querySelector('#zona').value;
+      const kebutuhan = form.querySelector('#kebutuhan').value.trim();
+      const volume = form.querySelector('#volume').value.trim();
+      const termin7 = form.querySelector('#termin7').checked;
+
+      if (!nama || !usaha || !whatsapp || !zona || !kebutuhan) {
+        showError('Mohon lengkapi semua field bertanda * sebelum mengirim.');
+        return;
+      }
+
+      if (!termin7) {
+        showError('Centang persetujuan termin 7 hari untuk melanjutkan.');
+        return;
+      }
+
+      const lines = [
+        '*PENAWARAN SUPLAI SAYUR - BANDUNG*',
+        '',
+        'Nama: ' + nama,
+        'Usaha: ' + usaha,
+        'WhatsApp: ' + whatsapp,
+        'Zona: ' + zona,
+        'Kebutuhan: ' + kebutuhan,
+      ];
+      if (volume) lines.push('Volume: ' + volume);
+      lines.push('');
+      lines.push('Skema pembayaran: Termin 7 hari (disetujui)');
+      lines.push('');
+      lines.push('Mohon info harga dan ketersediaan stok.');
+
+      const text = encodeURIComponent(lines.join('\n'));
+      const url = 'https://wa.me/' + waNumber + '?text=' + text;
+
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+  })();
+</script>
+
+<style>
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+</style>
