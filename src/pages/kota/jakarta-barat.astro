@@ -1,164 +1,746 @@
 ---
 /**
- * GENERATED FILE - DO NOT EDIT DIRECTLY
  * Kota: Jakarta Barat
- * Mode: SSR Only — Safe Output
+ * Mode: SSR Only — Unique Content + Product Slider + Contact Form
  */
 
 import MainLayout from '@/layouts/MainLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
-
 import CityHero from '@/components/city/CityHero.astro';
-import CityClientPage from '@/components/CityClientPage.astro';
-import { MapPin } from 'lucide-react';
-
+import {
+  MapPin,
+  Truck,
+  Clock,
+  Factory,
+  ChefHat,
+  ShieldCheck,
+  Store,
+  Building2,
+  CheckCircle2,
+  Leaf,
+  Send,
+  CalendarClock,
+  UtensilsCrossed,
+  ShoppingBag,
+} from 'lucide-react';
 import { jabodetabekCities } from '@/data/cities';
-import { vegetableData } from '@/data/data.js'; 
 
 const city = {
-  "slug": "jakarta-barat",
-  "name": "Jakarta Barat",
-  "title": "Supplier Sayuran Jakarta Barat | Distributor Sayur Fresh & Grosir",
-  "angle": "Pemasok utama sayuran untuk restoran, catering, dan pasar modern di wilayah Jakarta Barat. Menjamin kesegaran dari kebun Cipanas.",
-  "seoContent": "Kami melayani kebutuhan suplai sayur untuk area Puri Indah, Kebon Jeruk, hingga Cengkareng. Dengan sistem distribusi subuh, kami memastikan restoran oriental dan katering industri di Jakarta Barat menerima bahan baku terbaik dengan harga tangan pertama.",
-  "clientFocus": "Restoran Oriental, Katering Industri, & Modern Market",
-  "deliveryRoute": "Distribusi rutin via Tol Dalam Kota untuk ketepatan waktu drop-off di Jakarta Barat.",
-  "usp": "Legalitas PKP resmi dengan sistem pembayaran termin (TOP) untuk mitra korporasi.",
-  "logistics": [
+  slug: 'jakarta-barat',
+  name: 'Jakarta Barat',
+  title: 'Supplier Sayuran Jakarta Barat | Distributor Sayur Fresh & Grosir',
+  angle:
+    'Pemasok utama sayuran untuk restoran, catering, dan pasar modern di wilayah Jakarta Barat. Menjamin kesegaran dari kebun Cipanas.',
+  seoContent:
+    'Kami melayani kebutuhan suplai sayur untuk area Puri Indah, Kebon Jeruk, hingga Cengkareng. Dengan sistem distribusi subuh, kami memastikan restoran oriental dan katering industri di Jakarta Barat menerima bahan baku terbaik dengan harga tangan pertama.',
+  clientFocus: 'Restoran Oriental, Katering Industri, & Modern Market',
+  deliveryRoute:
+    'Distribusi rutin via Tol Dalam Kota untuk ketepatan waktu drop-off di Jakarta Barat.',
+  usp: 'Legalitas PKP resmi dengan sistem pembayaran termin (TOP) untuk mitra korporasi.',
+  logistics: [
     {
-      "time": "20:00",
-      "title": "Quality Sorting",
-      "desc": "Sortasi harian sesuai spesifikasi pesanan Jakarta Barat."
+      time: '20:00',
+      title: 'Quality Sorting',
+      desc: 'Sortasi harian sesuai spesifikasi pesanan Jakarta Barat.',
     },
     {
-      "time": "01:00",
-      "title": "West Corridor Route",
-      "desc": "Logistik rute cepat via jalur tol Jakarta Barat."
+      time: '01:00',
+      title: 'West Corridor Route',
+      desc: 'Logistik rute cepat via jalur tol Jakarta Barat.',
     },
     {
-      "time": "05:15",
-      "title": "Fresh Landing",
-      "desc": "Diterima di gudang/restoran sebelum operasional dimulai."
-    }
-  ]
+      time: '05:15',
+      title: 'Fresh Landing',
+      desc: 'Diterima di gudang/restoran sebelum operasional dimulai.',
+    },
+  ],
 };
 
-const title = `Supplier Sayur ${city.name} - CV Green Fresh Cipanas | Harga Kemitraan Perusahaan`;
-const description = `Layanan supply sayuran harian harga kompetitif untuk Hotel, Restoran, Cafe di wilayah ${city.name}.`;
+const title = `Supplier Sayur ${city.name} untuk Restoran Oriental, Katering Industri & Modern Market | CV Green Fresh Cipanas`;
+const description = `Distributor sayuran segar di ${city.name} dengan pengiriman subuh via Tol Dalam Kota, harga grosir, dan legalitas PKP. Termin pembayaran 7 hari untuk klien baru. Melayani ${city.clientFocus} di seluruh area ${city.name}.`;
+
+const waNumber = '6287780937884';
 
 const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
+  '@context': 'https://schema.org',
+  '@graph': [
     {
-      "@type": "Service",
-      "name": `Supplier Sayur Segar ${city.name}`,
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "CV Green Fresh Cipanas"
+      '@type': 'Service',
+      name: `Supplier Sayur Segar ${city.name}`,
+      provider: {
+        '@type': 'LocalBusiness',
+        name: 'CV Green Fresh Cipanas',
       },
-      "areaServed": {
-        "@type": "City",
-        "name": city.name
+      areaServed: {
+        '@type': 'City',
+        name: city.name,
       },
-      "description": description
-    }
-  ]
+      description: description,
+    },
+  ],
 };
 
-const currentIndex = jabodetabekCities.findIndex(c => c.slug === "jakarta-barat");
+const currentIndex = jabodetabekCities.findIndex((c) => c.slug === city.slug);
 const otherCities = [];
 for (let i = 1; i <= 6; i++) {
   const nextIndex = (currentIndex + i) % jabodetabekCities.length;
   otherCities.push(jabodetabekCities[nextIndex]);
 }
+
+// Zona Jakarta Barat — 8 kecamatan + kawasan bisnis
+const jakbarZones = [
+  { name: 'Kebon Jeruk', note: 'Resto oriental & kantor korporat' },
+  { name: 'Puri Indah', note: 'Restoran premium & hotel bisnis' },
+  { name: 'Cengkareng', note: 'Katering industri & bandara Soekarno-Hatta' },
+  { name: 'Tanjung Duren', note: 'Resto keluarga & kafe mahasiswa' },
+  { name: 'Grogol', note: 'Kantin kampus Trisakti & rumah sakit' },
+  { name: 'Palmerah', note: 'Restoran oriental & grosir sayur' },
+  { name: 'Kembangan', note: 'Resto premium & perumahan elite' },
+  { name: 'Kalideres', note: 'Katering hajatan & warung tenda' },
+  { name: 'Tambora', note: 'Warung makan & UMKM kuliner' },
+  { name: 'Taman Sari', note: 'Resto heritage & kafe wisata' },
+  { name: 'Mangga Besar (koridor)', note: 'Restoran oriental legendaris' },
+  { name: 'Glodok (koridor)', note: 'Restoran chinese food & seafood' },
+];
+
+// Kawasan karakteristik Jakarta Barat
+const jakbarIndustri = [
+  {
+    name: 'Puri Indah & Kembangan',
+    note: 'Restoran premium & hotel bisnis butuh sayur grade A untuk plating & buffet',
+  },
+  {
+    name: 'Mangga Besar & Glodok',
+    note: 'Restoran chinese food legendaris butuh sawi, bok choy, dan sayur oriental fresh',
+  },
+  {
+    name: 'Kebon Jeruk & Tanjung Duren',
+    note: 'Resto oriental modern & kafe mahasiswa butuh sayur untuk menu fusion',
+  },
+  {
+    name: 'Cengkareng & Kalideres',
+    note: 'Katering industri & hajatan butuh volume besar dengan harga grosir',
+  },
+  {
+    name: 'Grogol',
+    note: 'Kantin kampus & rumah sakit butuh sayur bersih siap masak untuk pasien & mahasiswa',
+  },
+  {
+    name: 'Modern Market & Supermarket',
+    note: 'Supermarket premium butuh sayur retail-ready dengan grading & packaging rapi',
+  },
+];
+
+// Tipe klien Jakarta Barat
+const jakbarClientTypes = [
+  {
+    icon: UtensilsCrossed,
+    title: 'Restoran Oriental & Chinese Food',
+    desc: 'Resto di Mangga Besar & Glodok butuh sawi, bok choy, dan sayur oriental lain dengan grade konsisten harian.',
+  },
+  {
+    icon: Factory,
+    title: 'Katering Industri',
+    desc: 'Katering pabrik & hajatan di Cengkareng dan Kalideres butuh volume besar dengan harga grosir tangan pertama.',
+  },
+  {
+    icon: ShoppingBag,
+    title: 'Modern Market & Supermarket',
+    desc: 'Supermarket premium butuh pasokan retail-ready dengan grading, kemasan, dan label yang rapi.',
+  },
+  {
+    icon: ChefHat,
+    title: 'Resto Premium & Hotel',
+    desc: 'Resto Puri Indah & Kembangan butuh sayur grade A untuk plating premium dan buffet breakfast.',
+  },
+];
+
+const jakbarLegal = [
+  'Faktur pajak elektronik resmi (PKP) untuk kebutuhan audit internal.',
+  'Termin pembayaran 7 hari (Net 7) untuk klien baru.',
+  'Term of Payment (TOP) hingga 30 hari untuk klien kontrak rutin.',
+  'Surat jalan dan berita acara penerimaan untuk setiap pengiriman.',
+  'Kontrak suplai tahunan dengan harga yang di-lock per kuartal.',
+];
+
+// Sayur unggulan — sesuai kebutuhan oriental & modern market
+const vegetables = [
+  {
+    name: 'Sawi Hijau',
+    desc: 'Daun utuh, segar. Favorit restoran oriental untuk tumis & capcay.',
+    img: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Bok Choy',
+    desc: 'Batang putih, daun hijau. Wajib untuk chinese food & oriental.',
+    img: 'https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Kubis Hijau',
+    desc: 'Padat, berlapis rapi. Cocok untuk katering volume besar & tumis.',
+    img: 'https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Wortel Brastagi',
+    desc: 'Manis alami, warna oranye cerah. Cocok sup, tumis & capcay.',
+    img: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Brokoli Hijau',
+    desc: 'Grade A, kuntum rapat. Untuk menu premium restoran & hotel.',
+    img: 'https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Paprika Merah',
+    desc: 'Tebal, manis. Untuk plating resto premium & menu kontinental.',
+    img: 'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Selada Romaine',
+    desc: 'Daun utuh, crispy. Favorit hotel & resto western untuk salad.',
+    img: 'https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Tomat Merah',
+    desc: 'Matang pohon, tidak lembek. Cocok untuk saus, salad & sup.',
+    img: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=600&q=80&auto=format&fit=crop',
+  },
+];
 ---
 
 <MainLayout title={title} description={description}>
+  <script
+    type="application/ld+json"
+    slot="head"
+    set:html={JSON.stringify(jsonLd)}
+  />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
-
-  <div class="bg-white text-[#052c17] font-sans antialiased overflow-x-hidden reveal-container">
+  <div class="bg-white text-[#052c17] font-sans antialiased overflow-x-hidden">
     <Header />
     <CityHero city={city} />
 
-    <main>
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8 sm:space-y-10">
 
-      <section class="py-16 bg-white border-t border-slate-50">
-        <div class="max-w-4xl mx-auto px-6">
-          <article class="prose prose-green max-w-none reveal-up">
-            <h2 class="text-3xl md:text-5xl font-black uppercase mb-8 text-[#052c17] tracking-tighter">
-              Supplier Sayur Jakarta Barat Terpercaya untuk Restoran, Hotel, & Supermarket
-            </h2>
-
-            <p class="text-lg text-slate-700 leading-relaxed mb-10 font-medium">
-              Dalam ekosistem bisnis kuliner yang sangat kompetitif di wilayah Jakarta Barat, kualitas bahan baku segar merupakan fondasi utama keberhasilan operasional harian. CV Green Fresh Cipanas memahami tantangan besar yang dihadapi oleh para pengelola Restoran Oriental, Hotel, & Katering Industri dalam mendapatkan pasokan sayur mayur yang konsisten dan berkualitas tinggi. Dengan mengandalkan hasil panen langsung dari lahan pertanian subur di dataran tinggi Cipanas, kami hadir sebagai mitra strategis yang menjembatani kebutuhan sayuran segar dengan efisiensi logistik yang tak tertandingi. Area layanan distribusi kami kini mencakup seluruh titik vital di Jakarta Barat, mulai dari kawasan Puri Indah, Kebon Jeruk, Cengkareng, Tanjung Duren, Grogol, guna memastikan setiap dapur profesional menerima produk dengan standar kesegaran terbaik langsung dari sumbernya tanpa melalui banyak perantara.
-            </p>
-
-            <div class="mb-10">
-              <h3 class="text-2xl font-bold text-[#15803d] uppercase mb-4 tracking-tight">
-                Standar Kurasi Produk Sayur Terbaik untuk Restoran Oriental, Hotel, & Katering Industri
-              </h3>
-              <p class="text-slate-600 leading-relaxed">
-                Kami menerapkan protokol Quality Control yang sangat ketat untuk memastikan setiap jenis komoditas memenuhi standar tinggi industri kuliner saat ini. Di wilayah Jakarta Barat, kebutuhan akan supplier sayur restoran, grosir sayur jakarta barat, katering pabrik menuntut ketelitian yang sangat tinggi, mulai dari tahap sortasi manual hingga pengemasan akhir yang aman. Produk sayuran hijau kami dipanen pada waktu yang paling optimal dan segera melalui proses pendinginan untuk menjaga tekstur renyah (crispy) dan kandungan nutrisi alaminya. Bagi mitra katering, hotel, hingga supermarket, kami menyediakan opsi kustomisasi potongan atau pembersihan (pre-cut) yang dirancang untuk mempercepat proses prapengolahan di dapur Anda. Dedikasi kami pada kualitas menjadikan kami sebagai pilihan utama bagi unit bisnis yang sangat mengutamakan kepuasan pelanggan dan tidak mentoleransi adanya rejection rate yang tinggi pada setiap pengiriman barang.
-              </p>
-            </div>
-
-            <div class="mb-10">
-              <h3 class="text-2xl font-bold text-[#15803d] uppercase mb-4 tracking-tight">
-                Infrastruktur Logistik Modern dan Fleksibilitas Kerjasama Perusahaan
-              </h3>
-              <p class="text-slate-600 leading-relaxed">
-                Kelancaran operasional harian bisnis Anda di Jakarta Barat sangat bergantung pada ketepatan waktu distribusi. Dengan dukungan infrastruktur Akses Tol Dalam Kota & Lingkar Luar, armada distribusi kami bergerak setiap subuh untuk menembus jalur-jalur sibuk di Jakarta Barat guna memastikan barang tiba sebelum puncak aktivitas dapur dimulai. Selain keunggulan pada sisi logistik, Green Fresh menawarkan skema kerjasama profesional berupa sistem pembayaran tempo atau Term of Payment (TOP) hingga 30 hari. Skema ini dirancang khusus untuk mendukung kesehatan arus kas korporasi dan memberikan fleksibilitas finansial yang lebih baik bagi para mitra. Kami juga menjamin transparansi administrasi secara menyeluruh dengan status pengusaha kena pajak (PKP) resmi serta penyediaan faktur pajak elektronik, sehingga sangat memudahkan proses audit internal dan manajemen keuangan bagi perusahaan mitra di seluruh wilayah Jakarta Barat.
-              </p>
-            </div>
-
-            <div class="mt-12 p-8 bg-[#f7faf7] rounded-3xl border-2 border-green-100 italic text-slate-700">
-              Memilih CV Green Fresh Cipanas berarti Anda sedang berinvestasi pada stabilitas stok dan konsistensi kualitas rasa pada setiap sajian menu Anda. Kami berkomitmen penuh untuk terus menjadi pilar pendukung bagi pertumbuhan industri restoran, hotel, supermarket, dan unit katering di Jakarta Barat dengan menyediakan pasokan sayur mayur yang stabil sepanjang tahun, bahkan di tengah tantangan cuaca ekstrem. Jangan ragu untuk segera menghubungi tim pemasaran kami guna mendiskusikan draf skema suplai yang paling efisien dan menguntungkan bagi pertumbuhan bisnis kuliner Anda hari ini.
-            </div>
-          </article>
+      <!-- ============ SECTION 1: INTRO ============ -->
+      <section>
+        <span class="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-[#166534] bg-green-50 border border-green-200 px-2.5 py-1 rounded-full mb-3">
+          <MapPin size={10} /> {city.name}, DKI Jakarta
+        </span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-[#052c17] tracking-tight leading-tight mb-4">
+          Supplier Sayur {city.name} untuk Restoran Oriental, Katering Industri & Modern Market
+        </h2>
+        <div class="space-y-3 text-slate-700 leading-relaxed">
+          <p>
+            {city.angle} CV Green Fresh Cipanas paham karakter Jakarta Barat
+            yang sangat khas: restoran oriental di Mangga Besar dan Glodok
+            butuh sawi dan bok choy fresh sebelum jam 6 pagi, sementara
+            supermarket premium di Puri Indah butuh sayur retail-ready dengan
+            grading yang konsisten. {city.deliveryRoute} {city.seoContent}
+          </p>
+          <p>
+            Kami fokus pada satu hal yang paling sering dilupakan supplier
+            besar: <strong>konsistensi grade untuk klien premium</strong>.
+            Bukan sekadar "bisa kirim", tapi bisa kirim sayur grade A untuk
+            resto premium dan grade retail untuk supermarket, dengan standar
+            yang sama setiap hari. {city.usp}
+          </p>
         </div>
       </section>
 
-      <div class="py-10 reveal-up">
-        <div class="max-w-[1800px] mx-auto px-6">
-          <CityClientPage city={city} vegetableData={vegetableData} />
-        </div>
-      </div>
-
-      <section class="py-20 bg-slate-50 border-t border-green-100">
-        <div class="max-w-[1800px] mx-auto px-6">
-          <div class="mb-12">
-            <h3 class="text-xs font-black text-[#166534] uppercase tracking-[0.4em] flex items-center gap-3">
-              <MapPin size={14} /> Jangkauan Kami
+      <!-- ============ SECTION 2: SLIDER PRODUK ============ -->
+      <section>
+        <div class="flex items-end justify-between gap-3 mb-4">
+          <div class="min-w-0">
+            <h3 class="text-lg sm:text-xl font-bold text-[#052c17] flex items-center gap-2">
+              <Leaf size={18} class="text-[#166534]" /> Sayuran Segar untuk Resto & Market
             </h3>
-
-            <h2 class="text-3xl font-black uppercase text-[#052c17]">
-              Area Sekitar {city.name}
-            </h2>
+            <p class="text-sm text-slate-600 mt-1">
+              Dipanen pagi, dikirim subuh, sampai dapur/gudang Anda sebelum jam 6.
+            </p>
           </div>
+          <div class="hidden sm:flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              data-slider-prev
+              aria-label="Sebelumnya"
+              class="w-9 h-9 rounded-full border border-slate-300 bg-white hover:bg-green-50 hover:border-[#166534] active:scale-95 transition flex items-center justify-center text-[#052c17]"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button
+              type="button"
+              data-slider-next
+              aria-label="Berikutnya"
+              class="w-9 h-9 rounded-full border border-slate-300 bg-white hover:bg-green-50 hover:border-[#166534] active:scale-95 transition flex items-center justify-center text-[#052c17]"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
 
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {otherCities.map((otherCity) => (
-              <a href={`/kota/${otherCity.slug}`} class="group p-6 rounded-2xl border bg-white hover:bg-green-50 transition text-center">
-                <span class="text-xs font-black uppercase tracking-wider group-hover:text-[#166534]">
-                  {otherCity.name}
+        <div
+          id="veggie-slider"
+          class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 scrollbar-hide scroll-smooth"
+        >
+          {vegetables.map((v) => (
+            <article class="snap-start shrink-0 w-[240px] sm:w-[260px] rounded-xl overflow-hidden border border-slate-200 bg-white hover:shadow-md hover:border-[#166534]/30 transition">
+              <div class="relative h-40 sm:h-44 bg-slate-100">
+                <img
+                  src={v.img}
+                  alt={v.name}
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-cover"
+                />
+                <span class="absolute top-2 left-2 text-[9px] font-black uppercase tracking-wider bg-white/95 text-[#166534] border border-green-200 px-2 py-0.5 rounded">
+                  Fresh
                 </span>
-              </a>
+              </div>
+              <div class="p-3">
+                <h4 class="font-bold text-sm text-[#052c17] mb-0.5">
+                  {v.name}
+                </h4>
+                <p class="text-[11px] text-slate-600 leading-snug">
+                  {v.desc}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <p class="text-[10px] text-slate-400 mt-2 text-center sm:hidden">
+          ← geser untuk lihat lainnya →
+        </p>
+      </section>
+
+      <!-- ============ SECTION 3: TIPE KLIEN ============ -->
+      <section>
+        <div class="mb-4">
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17]">
+            Tipe Klien di {city.name}
+          </h3>
+          <p class="text-sm text-slate-600 mt-1">
+            {city.clientFocus} — masing-masing punya pola order, jadwal, dan
+            jenis sayur favorit berbeda.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {jakbarClientTypes.map((c) => (
+            <div class="flex items-start gap-3 p-4 rounded-xl border border-slate-200 border-l-4 border-l-[#166534] bg-white hover:bg-green-50/40 hover:shadow-sm transition">
+              <div class="w-9 h-9 rounded-lg bg-[#166534] text-white flex items-center justify-center shrink-0">
+                <c.icon size={16} />
+              </div>
+              <div class="min-w-0">
+                <h4 class="font-bold text-sm text-[#052c17] mb-1">
+                  {c.title}
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  {c.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ SECTION 4: KAWASAN + TIMELINE (2 kolom) ============ -->
+      <section class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17] mb-3 flex items-center gap-2">
+            <Factory size={18} class="text-[#166534]" /> Kawasan Kuliner Jakarta Barat
+          </h3>
+          <p class="text-sm text-slate-600 mb-3">
+            Jakarta Barat punya karakter unik: restoran oriental legendaris,
+            kawasan bisnis premium, dan pasar modern. Kami sudah terbiasa
+            melayani:
+          </p>
+          <ul class="space-y-2">
+            {jakbarIndustri.map((z) => (
+              <li class="flex items-start gap-2.5 p-3 rounded-lg bg-slate-50 border border-slate-100">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#166534] mt-2 shrink-0"></span>
+                <div>
+                  <strong class="text-sm text-[#052c17]">{z.name}</strong>
+                  <p class="text-xs text-slate-600 leading-snug mt-0.5">
+                    {z.note}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17] mb-3 flex items-center gap-2">
+            <Clock size={18} class="text-[#166534]" /> Timeline Distribusi Subuh
+          </h3>
+          <p class="text-sm text-slate-600 mb-3">
+            Resto oriental buka jam 7, supermarket jam 8. Kami kirim sebelum
+            itu. Berikut jadwal operasional kami:
+          </p>
+          <div class="space-y-2">
+            {city.logistics.map((l) => (
+              <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-200">
+                <div class="shrink-0 text-center">
+                  <span class="inline-block text-xs font-mono font-bold text-[#166534] bg-green-50 border border-green-200 rounded px-2 py-0.5">
+                    {l.time}
+                  </span>
+                </div>
+                <div>
+                  <strong class="text-sm text-[#052c17]">{l.title}</strong>
+                  <p class="text-xs text-slate-600 leading-snug mt-0.5">
+                    {l.desc}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
+
+      <!-- ============ SECTION 5: LEGALITAS ============ -->
+      <section>
+        <h3 class="text-lg sm:text-xl font-bold text-[#052c17] mb-3 flex items-center gap-2">
+          <ShieldCheck size={18} class="text-[#166534]" /> Legalitas & Administrasi Perusahaan
+        </h3>
+        <div class="grid sm:grid-cols-2 gap-2.5">
+          {jakbarLegal.map((item) => (
+            <div class="flex items-start gap-2.5 p-3 rounded-lg bg-green-50/60 border border-green-100">
+              <CheckCircle2 size={14} class="text-[#166534] mt-0.5 shrink-0" />
+              <span class="text-sm text-slate-700 leading-snug">{item}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ SECTION 6: ZONA KECAMATAN ============ -->
+      <section>
+        <div class="mb-3">
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17] flex items-center gap-2">
+            <MapPin size={18} class="text-[#166534]" /> Zona Pengiriman — Jakarta Barat & Sekitarnya
+          </h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Jadwal dan minimum order disesuaikan dengan karakter tiap zona.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+          {jakbarZones.map((z) => (
+            <div class="p-3 rounded-lg border border-slate-200 bg-white hover:border-[#166534] hover:bg-green-50/40 transition">
+              <div class="font-bold text-xs text-[#052c17] mb-0.5">
+                {z.name}
+              </div>
+              <div class="text-[11px] text-slate-600 leading-snug">
+                {z.note}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ SECTION 7: AREA SEKITAR ============ -->
+      <section>
+        <div class="mb-3">
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17] flex items-center gap-2">
+            <Truck size={18} class="text-[#166534]" /> Area Sekitar {city.name}
+          </h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Kami juga melayani kota-kota berikut dengan pola pengiriman yang
+            sama.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+          {otherCities.map((otherCity) => (
+            <a
+              href={`/kota/${otherCity.slug}`}
+              class="group p-3 rounded-lg border border-slate-200 bg-white hover:border-[#166534] hover:bg-green-50 transition text-center"
+            >
+              <span class="text-xs font-bold uppercase tracking-wide text-[#052c17] group-hover:text-[#166534]">
+                {otherCity.name}
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ SECTION 8: CONTACT FORM + TERMIN 7 HARI ============ -->
+      <section id="kontak" class="scroll-mt-20">
+        <div class="rounded-2xl border-2 border-[#166534] bg-gradient-to-br from-[#f0fdf4] to-white overflow-hidden">
+
+          <!-- Header form -->
+          <div class="p-5 sm:p-6 border-b-2 border-[#166534]/20 bg-[#166534]">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-lg bg-white/15 backdrop-blur flex items-center justify-center shrink-0">
+                <Send size={18} class="text-white" />
+              </div>
+              <div>
+                <h3 class="text-lg sm:text-xl font-bold text-white">
+                  Minta Penawaran Suplai {city.name}
+                </h3>
+                <p class="text-xs sm:text-sm text-green-100 mt-0.5">
+                  Isi form — tim kami balas via WhatsApp dalam 1×24 jam kerja.
+                </p>
+              </div>
+            </div>
+
+            <!-- Badge Termin 7 Hari -->
+            <div class="mt-4 inline-flex items-center gap-2 bg-yellow-300 text-[#052c17] border border-yellow-400 rounded-lg px-3 py-1.5">
+              <CalendarClock size={14} />
+              <span class="text-xs font-bold">
+                Termin Pembayaran 7 Hari untuk Klien Baru
+              </span>
+            </div>
+          </div>
+
+          <!-- Form body -->
+          <form
+            id="kontak-form"
+            class="p-5 sm:p-6 space-y-4"
+            data-wa={waNumber}
+            data-kota={city.name}
+            novalidate
+          >
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="nama" class="block text-xs font-bold text-[#052c17] mb-1">
+                  Nama Lengkap <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="nama"
+                  name="nama"
+                  required
+                  autocomplete="name"
+                  placeholder="Budi Santoso"
+                  class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+                />
+              </div>
+
+              <div>
+                <label for="usaha" class="block text-xs font-bold text-[#052c17] mb-1">
+                  Nama Usaha / Perusahaan <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="usaha"
+                  name="usaha"
+                  required
+                  autocomplete="organization"
+                  placeholder="Resto Oriental Sejahtera"
+                  class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="whatsapp" class="block text-xs font-bold text-[#052c17] mb-1">
+                  No. WhatsApp <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="whatsapp"
+                  name="whatsapp"
+                  required
+                  inputmode="numeric"
+                  pattern="[0-9+\s-]{8,18}"
+                  autocomplete="tel"
+                  placeholder="08xx xxxx xxxx"
+                  class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+                />
+              </div>
+
+              <div>
+                <label for="zona" class="block text-xs font-bold text-[#052c17] mb-1">
+                  Zona Pengiriman <span class="text-rose-500">*</span>
+                </label>
+                <select
+                  id="zona"
+                  name="zona"
+                  required
+                  class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+                >
+                  <option value="">— Pilih zona —</option>
+                  {jakbarZones.map((z) => (
+                    <option value={z.name}>{z.name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="kebutuhan" class="block text-xs font-bold text-[#052c17] mb-1">
+                Kebutuhan Sayur <span class="text-rose-500">*</span>
+              </label>
+              <textarea
+                id="kebutuhan"
+                name="kebutuhan"
+                required
+                rows="3"
+                placeholder="Contoh: Sawi 30 kg/hari, Bok Choy 20 kg/hari, Brokoli 10 kg/hari untuk resto oriental."
+                class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition resize-y"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="volume" class="block text-xs font-bold text-[#052c17] mb-1">
+                Estimasi Volume Harian <span class="text-slate-400 font-normal">(opsional)</span>
+              </label>
+              <input
+                type="text"
+                id="volume"
+                name="volume"
+                placeholder="Contoh: ±100 kg per hari"
+                class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+              />
+            </div>
+
+            <!-- Checkbox termin 7 hari -->
+            <div class="p-3 rounded-lg bg-yellow-50 border border-yellow-200">
+              <label class="flex items-start gap-2.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  id="termin7"
+                  name="termin7"
+                  required
+                  class="mt-0.5 w-4 h-4 rounded border-slate-300 text-[#166534] focus:ring-[#166534]"
+                />
+                <span class="text-xs text-slate-700 leading-relaxed">
+                  Saya setuju dengan skema <strong>termin pembayaran 7 hari (Net 7)</strong> untuk transaksi pertama, dengan syarat & ketentuan yang berlaku.
+                </span>
+              </label>
+            </div>
+
+            <!-- Error message -->
+            <div
+              id="form-error"
+              class="hidden p-3 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700"
+              role="alert"
+            ></div>
+
+            <button
+              type="submit"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#166534] text-white font-bold text-sm hover:bg-[#14532d] active:scale-[0.98] transition shadow-md"
+            >
+              <Send size={16} /> Kirim via WhatsApp
+            </button>
+
+            <p class="text-[10px] text-slate-500 leading-relaxed">
+              Dengan mengirim form ini, Anda akan diarahkan ke WhatsApp kami
+              dengan pesan yang sudah terisi otomatis. Tim marketing akan
+              membalas dalam 1×24 jam kerja.
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============ CTA PENUTUP ============ -->
+      <section class="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-[#dcfce7] border-2 border-green-200">
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed italic">
+          Untuk restoran oriental, katering industri, dan modern market di
+          Jakarta Barat, memilih supplier bukan soal harga termurah — tapi
+          soal siapa yang bisa hadir konsisten setiap subuh melewati jalur
+          Tol Dalam Kota, 365 hari setahun. Kalau Anda mengelola resto
+          oriental, katering, supermarket, atau hotel di Jakarta Barat, isi
+          form di atas atau hubungi tim pemasaran kami untuk diskusi skema
+          suplai yang paling efisien.
+        </p>
+      </section>
+
     </main>
 
     <Footer />
   </div>
 </MainLayout>
 
+<script is:inline>
+  (function () {
+    // ---- Slider ----
+    const slider = document.getElementById('veggie-slider');
+    if (slider) {
+      const scrollAmount = 280;
+      document.querySelectorAll('[data-slider-prev]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+      });
+      document.querySelectorAll('[data-slider-next]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+      });
+    }
+
+    // ---- Contact Form -> WhatsApp ----
+    const form = document.getElementById('kontak-form');
+    if (!form) return;
+
+    const waNumber = form.getAttribute('data-wa') || '6287780937884';
+    const kota = form.getAttribute('data-kota') || 'Jakarta Barat';
+    const errorBox = document.getElementById('form-error');
+
+    function showError(msg) {
+      if (!errorBox) return;
+      errorBox.textContent = msg;
+      errorBox.classList.remove('hidden');
+    }
+
+    function hideError() {
+      if (!errorBox) return;
+      errorBox.classList.add('hidden');
+      errorBox.textContent = '';
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      hideError();
+
+      const nama = form.querySelector('#nama').value.trim();
+      const usaha = form.querySelector('#usaha').value.trim();
+      const whatsapp = form.querySelector('#whatsapp').value.trim();
+      const zona = form.querySelector('#zona').value;
+      const kebutuhan = form.querySelector('#kebutuhan').value.trim();
+      const volume = form.querySelector('#volume').value.trim();
+      const termin7 = form.querySelector('#termin7').checked;
+
+      if (!nama || !usaha || !whatsapp || !zona || !kebutuhan) {
+        showError('Mohon lengkapi semua field bertanda * sebelum mengirim.');
+        return;
+      }
+
+      if (!termin7) {
+        showError('Centang persetujuan termin 7 hari untuk melanjutkan.');
+        return;
+      }
+
+      const lines = [
+        '*PENAWARAN SUPLAI SAYUR - ' + kota.toUpperCase() + '*',
+        '',
+        'Nama: ' + nama,
+        'Usaha: ' + usaha,
+        'WhatsApp: ' + whatsapp,
+        'Zona: ' + zona,
+        'Kebutuhan: ' + kebutuhan,
+      ];
+      if (volume) lines.push('Volume: ' + volume);
+      lines.push('');
+      lines.push('Skema pembayaran: Termin 7 hari (disetujui)');
+      lines.push('');
+      lines.push('Mohon info harga dan ketersediaan stok.');
+
+      const text = encodeURIComponent(lines.join('\n'));
+      const url = 'https://wa.me/' + waNumber + '?text=' + text;
+
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+  })();
+</script>
+
 <style>
-.reveal-up {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all .8s cubic-bezier(.16,1,.3,1);
-}
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 </style>

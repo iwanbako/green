@@ -1,95 +1,188 @@
 ---
 /**
- * FOOTER COMPONENT - 2 COLUMN MOBILE & FLOATING STICKY BOTTOM
+ * FOOTER COMPONENT - Modern Clean Design
+ * Removed: Floating sticky bottom bar (mobile)
+ * Redesign: Layout lebih rapi, tipografi lebih jelas, visual hierarchy kuat.
  */
-import { Leaf, Phone, Send, Mail, MapPin, ShoppingBag, MessageCircle } from 'lucide-react';
+import { Leaf, Phone, Send, Mail, MapPin, ArrowUpRight, Sparkles } from 'lucide-react';
 
 const currentYear = new Date().getFullYear();
 const waNumber = "6287780937884";
 const waText = "Halo Green Fresh, saya ingin melakukan pemesanan sayuran. Mohon informasi stok harian. Terima kasih.";
 const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(waText)}`;
+
+const navigasiLinks = [
+  { label: 'Katalog Produk', href: '/produk' },
+  { label: 'Gallery Kualitas', href: '/gallery' },
+  { label: 'Tentang Kami', href: '/about' },
+];
+
+const wilayahLinks = [
+  { label: 'Indeks Kota', href: '/kota' },
+  { label: 'Cakupan Area', href: '/area' },
+];
 ---
 
-<footer class="bg-[#052c17] text-white pt-12 md:pt-20 font-sans border-t border-white/5 pb-24 md:pb-0 relative">
-  <div class="max-w-[1400px] mx-auto px-6">
+<footer class="bg-[#052c17] text-white font-sans relative overflow-hidden">
+  <!-- Decorative gradient -->
+  <div class="absolute inset-0 opacity-[0.03] pointer-events-none">
+    <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-green-400 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+    <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-emerald-500 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3"></div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-5 sm:px-6 py-12 sm:py-16">
     
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-y-10 gap-x-6 mb-12 md:mb-16">
+    <!-- Top Section: Brand + CTA -->
+    <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 pb-10 sm:pb-12 border-b border-white/10">
       
-      <div class="col-span-2 lg:col-span-1 space-y-4 md:space-y-6">
-        <a href="/" class="flex items-center gap-2 group">
-          <Leaf class="text-[#bef264] w-5 h-5 md:w-6 md:h-6" fill="currentColor" />
-          <span class="text-lg md:text-xl font-black uppercase tracking-tighter">
-            Green<span class="text-[#bef264]">Fresh</span>
-          </span>
+      <!-- Brand & Description -->
+      <div class="lg:col-span-5 space-y-4">
+        <a href="/" class="inline-flex items-center gap-3 group">
+          <div class="w-11 h-11 bg-[#bef264] rounded-xl flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+            <Leaf class="text-[#052c17] w-6 h-6" fill="currentColor" />
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xl font-extrabold tracking-tight text-white leading-none">
+              Green<span class="text-[#bef264]">Fresh</span>
+            </span>
+            <span class="text-[10px] font-semibold uppercase tracking-wider text-green-400/80 mt-1">
+              Supplier Sayur B2B
+            </span>
+          </div>
         </a>
-        <p class="text-[11px] md:text-sm text-slate-400 font-medium leading-relaxed max-w-[280px]">
-          Penyedia sayuran grade A untuk kebutuhan industri horeka dan ritel modern.
+        <p class="text-sm text-slate-300/90 leading-relaxed max-w-md">
+          Penyedia sayuran grade A untuk kebutuhan industri horeka, flight
+          catering, dan ritel modern. Distribusi subuh ke seluruh Jabodetabek
+          dengan rantai dingin terjaga.
         </p>
+        <div class="flex flex-wrap gap-2 pt-2">
+          <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider bg-green-500/10 text-green-300 border border-green-500/20 px-2.5 py-1 rounded-full">
+            <Sparkles size={10} /> HACCP-Ready
+          </span>
+          <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider bg-green-500/10 text-green-300 border border-green-500/20 px-2.5 py-1 rounded-full">
+            <Sparkles size={10} /> PKP Resmi
+          </span>
+          <span class="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider bg-green-500/10 text-green-300 border border-green-500/20 px-2.5 py-1 rounded-full">
+            <Sparkles size={10} /> Cold Chain
+          </span>
+        </div>
       </div>
 
-      <div class="space-y-4 md:space-y-6">
-        <h4 class="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] text-[#bef264]">Navigasi</h4>
-        <ul class="space-y-2 md:space-y-3 text-[11px] md:text-sm font-bold text-slate-300">
-          <li><a href="/produk" class="hover:text-white transition-colors">Produk</a></li>
-          <li><a href="/gallery" class="hover:text-white transition-colors">Gallery</a></li>
-          <li><a href="/about" class="hover:text-white transition-colors">Tentang</a></li>
+      <!-- Links -->
+      <div class="lg:col-span-2 space-y-4">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#bef264]">
+          Navigasi
+        </h4>
+        <ul class="space-y-2.5">
+          {navigasiLinks.map((link) => (
+            <li>
+              <a 
+                href={link.href} 
+                class="group inline-flex items-center gap-1 text-sm text-slate-300 hover:text-white transition-colors"
+              >
+                {link.label}
+                <ArrowUpRight size={12} class="opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 
-      <div class="space-y-4 md:space-y-6">
-        <h4 class="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] text-[#bef264]">Wilayah</h4>
-        <ul class="space-y-2 md:space-y-3 text-[11px] md:text-sm font-bold text-slate-300">
-          <li><a href="/kota" class="hover:text-white transition-colors">Index Kota</a></li>
-          <li><a href="/area" class="hover:text-white transition-colors">Index Area</a></li>
+      <div class="lg:col-span-2 space-y-4">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#bef264]">
+          Wilayah
+        </h4>
+        <ul class="space-y-2.5">
+          {wilayahLinks.map((link) => (
+            <li>
+              <a 
+                href={link.href} 
+                class="group inline-flex items-center gap-1 text-sm text-slate-300 hover:text-white transition-colors"
+              >
+                {link.label}
+                <ArrowUpRight size={12} class="opacity-0 group-hover:opacity-100 transition-opacity" />
+              </a>
+            </li>
+          ))}
         </ul>
       </div>
 
-      <div class="col-span-2 lg:col-span-1 space-y-4 md:space-y-6 text-left">
-        <h4 class="text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] text-[#bef264]">Hubungi Kami</h4>
-        <div class="space-y-3 md:space-y-4 text-[11px] md:text-sm font-bold">
-          <a href={waLink} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-white hover:text-[#bef264] transition-colors">
-            <Phone size={14} class="text-[#bef264]" /> 0877 8093 7884
+      <!-- Contact -->
+      <div class="lg:col-span-3 space-y-4">
+        <h4 class="text-xs font-bold uppercase tracking-wider text-[#bef264]">
+          Hubungi Kami
+        </h4>
+        <div class="space-y-3">
+          <a 
+            href={waLink} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            class="group flex items-start gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-green-500/30 transition-all"
+          >
+            <div class="w-9 h-9 rounded-lg bg-[#bef264]/10 flex items-center justify-center shrink-0">
+              <Phone size={15} class="text-[#bef264]" />
+            </div>
+            <div class="min-w-0">
+              <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                WhatsApp
+              </div>
+              <div class="text-sm font-bold text-white mt-0.5">
+                0877 8093 7884
+              </div>
+            </div>
           </a>
-          <a href="mailto:sales@greenfresh.co.id" class="flex items-center gap-3 text-white hover:text-[#bef264] transition-colors break-all">
-            <Mail size={14} class="text-[#bef264]" /> sales@greenfresh.co.id
+
+          <a 
+            href="mailto:sales@greenfresh.co.id" 
+            class="group flex items-start gap-3 p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-green-500/30 transition-all"
+          >
+            <div class="w-9 h-9 rounded-lg bg-[#bef264]/10 flex items-center justify-center shrink-0">
+              <Mail size={15} class="text-[#bef264]" />
+            </div>
+            <div class="min-w-0">
+              <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                Email
+              </div>
+              <div class="text-sm font-bold text-white mt-0.5 truncate">
+                sales@greenfresh.co.id
+              </div>
+            </div>
           </a>
-          <div class="flex items-center gap-3 text-slate-400">
-            <MapPin size={14} /> Cipanas, Jawa Barat
+
+          <div class="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/10">
+            <div class="w-9 h-9 rounded-lg bg-[#bef264]/10 flex items-center justify-center shrink-0">
+              <MapPin size={15} class="text-[#bef264]" />
+            </div>
+            <div class="min-w-0">
+              <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+                Kantor Pusat
+              </div>
+              <div class="text-sm font-bold text-white mt-0.5">
+                Cipanas, Jawa Barat
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="py-6 md:py-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-      <p class="text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-slate-500">
-        CV Green Fresh Cipanas © {currentYear}
+    <!-- Bottom Section: Copyright + Telegram -->
+    <div class="pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+      <p class="text-xs text-slate-400 text-center sm:text-left">
+        © {currentYear} <span class="text-white font-semibold">CV Green Fresh Cipanas</span>. All rights reserved.
       </p>
       
-      <a href="https://t.me/suppliersayur_bot" target="_blank" rel="noopener noreferrer" class="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-[#bef264] flex items-center gap-2 bg-white/5 px-4 py-2 rounded-full border border-white/10">
-        <Send size={12} /> Telegram Price Bot
+      <a 
+        href="https://t.me/suppliersayur_bot" 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="inline-flex items-center gap-2 text-xs font-semibold text-[#bef264] hover:text-white bg-white/5 hover:bg-white/10 px-4 py-2 rounded-full border border-white/10 hover:border-[#bef264]/30 transition-all"
+      >
+        <Send size={13} /> Telegram Price Bot
       </a>
     </div>
   </div>
 
-  <div class="h-1 w-full bg-[#bef264] opacity-10"></div>
-
-  <!-- FLOATING STICKY BOTTOM BAR (Khusus Mobile / Layar HP) -->
-  <div class="md:hidden fixed bottom-3 left-3 right-3 z-[110] bg-[#07190f]/95 backdrop-blur-md border border-emerald-800/60 p-2.5 rounded-2xl shadow-2xl flex items-center gap-2">
-    <a 
-      href="/produk" 
-      class="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-[#122419] text-slate-200 hover:text-white rounded-xl text-[10px] font-black uppercase tracking-widest border border-emerald-800/50 transition-all shadow-sm"
-    >
-      <ShoppingBag size={14} class="text-emerald-400" />
-      Katalog Produk
-    </a>
-    <a 
-      href={waLink} 
-      target="_blank" 
-      rel="noopener noreferrer"
-      class="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-[#052c17] rounded-xl text-[10px] font-black uppercase tracking-widest shadow-md transition-all font-bold"
-    >
-      <MessageCircle size={14} fill="currentColor" />
-      WhatsApp Sales
-    </a>
-  </div>
+  <!-- Bottom accent line -->
+  <div class="h-1 w-full bg-gradient-to-r from-[#bef264]/0 via-[#bef264]/40 to-[#bef264]/0"></div>
 </footer>

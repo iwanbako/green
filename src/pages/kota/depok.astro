@@ -1,164 +1,743 @@
 ---
 /**
- * GENERATED FILE - DO NOT EDIT DIRECTLY
  * Kota: Depok
- * Mode: SSR Only — Safe Output
+ * Mode: SSR Only — Unique Content + Product Slider + Contact Form
  */
 
 import MainLayout from '@/layouts/MainLayout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
-
 import CityHero from '@/components/city/CityHero.astro';
-import CityClientPage from '@/components/CityClientPage.astro';
-import { MapPin } from 'lucide-react';
-
+import {
+  MapPin,
+  Truck,
+  Clock,
+  Factory,
+  ChefHat,
+  ShieldCheck,
+  Store,
+  Building2,
+  CheckCircle2,
+  Leaf,
+  Send,
+  CalendarClock,
+  Coffee,
+  GraduationCap,
+} from 'lucide-react';
 import { jabodetabekCities } from '@/data/cities';
-import { vegetableData } from '@/data/data.js'; 
 
 const city = {
-  "slug": "depok",
-  "name": "Depok",
-  "title": "Supplier Sayuran Depok | Agen Sayur Segar Cipanas",
-  "angle": "Partner terpercaya katering rumahan dan cafe di Depok. Memberikan harga grosir dengan kualitas retail.",
-  "seoContent": "Menjangkau Margonda, Cimanggis, hingga Sawangan. Kami menyediakan sayuran dengan harga petani bagi UMKM kuliner di Depok yang ingin meningkatkan kualitas sajian tanpa membengkakkan biaya.",
-  "clientFocus": "Cafe, Cloud Kitchen, & UMKM Kuliner Depok",
-  "deliveryRoute": "Pengiriman subuh via jalur Jalan Raya Bogor untuk efisiensi waktu.",
-  "usp": "Fleksibilitas order untuk UMKM dengan standar kualitas Horeka.",
-  "logistics": [
+  slug: 'depok',
+  name: 'Depok',
+  title: 'Supplier Sayuran Depok | Agen Sayur Segar Cipanas',
+  angle:
+    'Partner terpercaya katering rumahan dan cafe di Depok. Memberikan harga grosir dengan kualitas retail.',
+  seoContent:
+    'Menjangkau Margonda, Cimanggis, hingga Sawangan. Kami menyediakan sayuran dengan harga petani bagi UMKM kuliner di Depok yang ingin meningkatkan kualitas sajian tanpa membengkakkan biaya.',
+  clientFocus: 'Cafe, Cloud Kitchen, & UMKM Kuliner Depok',
+  deliveryRoute:
+    'Pengiriman subuh via jalur Jalan Raya Bogor untuk efisiensi waktu.',
+  usp: 'Fleksibilitas order untuk UMKM dengan standar kualitas Horeka.',
+  logistics: [
     {
-      "time": "21:30",
-      "title": "Daily Selection",
-      "desc": "Sortasi harian untuk pesanan cafe & resto Depok."
+      time: '21:30',
+      title: 'Daily Selection',
+      desc: 'Sortasi harian untuk pesanan cafe & resto Depok.',
     },
     {
-      "time": "02:15",
-      "title": "Depok-Bogor Way",
-      "desc": "Pengiriman rutin via jalur logistik selatan."
+      time: '02:15',
+      title: 'Depok-Bogor Way',
+      desc: 'Pengiriman rutin via jalur logistik selatan.',
     },
     {
-      "time": "06:00",
-      "title": "Business Landing",
-      "desc": "Diterima oleh pengelola unit bisnis kuliner."
-    }
-  ]
+      time: '06:00',
+      title: 'Business Landing',
+      desc: 'Diterima oleh pengelola unit bisnis kuliner.',
+    },
+  ],
 };
 
-const title = `Supplier Sayur ${city.name} - CV Green Fresh Cipanas | Harga Kemitraan Perusahaan`;
-const description = `Layanan supply sayuran harian harga kompetitif untuk Hotel, Restoran, Cafe di wilayah ${city.name}.`;
+const title = `Supplier Sayur ${city.name} untuk Cafe, Cloud Kitchen & UMKM Kuliner | CV Green Fresh Cipanas`;
+const description = `Distributor sayuran segar di ${city.name} dengan harga grosir, pengiriman subuh via Jalan Raya Bogor, dan legalitas PKP. Termin pembayaran 7 hari untuk klien baru. Melayani ${city.clientFocus} di seluruh area ${city.name}.`;
+
+const waNumber = '6287780937884';
 
 const jsonLd = {
-  "@context": "https://schema.org",
-  "@graph": [
+  '@context': 'https://schema.org',
+  '@graph': [
     {
-      "@type": "Service",
-      "name": `Supplier Sayur Segar ${city.name}`,
-      "provider": {
-        "@type": "LocalBusiness",
-        "name": "CV Green Fresh Cipanas"
+      '@type': 'Service',
+      name: `Supplier Sayur Segar ${city.name}`,
+      provider: {
+        '@type': 'LocalBusiness',
+        name: 'CV Green Fresh Cipanas',
       },
-      "areaServed": {
-        "@type": "City",
-        "name": city.name
+      areaServed: {
+        '@type': 'City',
+        name: city.name,
       },
-      "description": description
-    }
-  ]
+      description: description,
+    },
+  ],
 };
 
-const currentIndex = jabodetabekCities.findIndex(c => c.slug === "depok");
+const currentIndex = jabodetabekCities.findIndex((c) => c.slug === city.slug);
 const otherCities = [];
 for (let i = 1; i <= 6; i++) {
   const nextIndex = (currentIndex + i) % jabodetabekCities.length;
   otherCities.push(jabodetabekCities[nextIndex]);
 }
+
+// Zona Depok — 11 kecamatan
+const depokZones = [
+  { name: 'Beji', note: 'Kafe & kos mahasiswa UI Margonda' },
+  { name: 'Pancoran Mas', note: 'Pusat kuliner Margonda & resto keluarga' },
+  { name: 'Sukmajaya', note: 'Cloud kitchen & UMKM online' },
+  { name: 'Cimanggis', note: 'Resto keluarga & kantin perkantoran' },
+  { name: 'Cilodong', note: 'Warung makan & katering rumahan' },
+  { name: 'Limo', note: 'Kafe kekinian & resto mahasiswa' },
+  { name: 'Cinere', note: 'Resto premium & cafe instagramable' },
+  { name: 'Tapos', note: 'Katering hajatan & warung tenda' },
+  { name: 'Sawangan', note: 'Perumahan baru & cafe modern' },
+  { name: 'Bojongsari', note: 'Katering & warung keluarga' },
+  { name: 'Cipayung', note: 'Warung makan & UMKM kuliner' },
+  { name: 'Margonda (koridor)', note: 'Cafe, resto, & cloud kitchen utama' },
+];
+
+// Kawasan karakteristik Depok
+const depokIndustri = [
+  {
+    name: 'Koridor Margonda',
+    note: 'Cafe & resto mahasiswa UI, butuh sayur fresh untuk menu kontinental & kopi',
+  },
+  {
+    name: 'Kampus UI Beji',
+    note: 'Kantin kampus & katering mahasiswa butuh sayur harga terjangkau',
+  },
+  {
+    name: 'Cinere & Limo',
+    note: 'Resto premium & cafe instagramable butuh plating sayur grade A',
+  },
+  {
+    name: 'Cloud Kitchen Cluster',
+    note: 'Cloud kitchen online butuh supply kecil-sedang tapi konsisten harian',
+  },
+  {
+    name: 'Sawangan & Bojongsari',
+    note: 'Perumahan baru dengan cafe modern & resto keluarga',
+  },
+  {
+    name: 'Cimanggis',
+    note: 'Kantin perkantoran & restoran keluarga pinggir Jalan Raya Bogor',
+  },
+];
+
+// Tipe klien Depok — fokus UMKM & cafe
+const depokClientTypes = [
+  {
+    icon: Coffee,
+    title: 'Cafe & Coffee Shop',
+    desc: 'Kafe di Margonda dan Cinere butuh selada, tomat, dan sayur plating premium yang konsisten setiap hari.',
+  },
+  {
+    icon: Store,
+    title: 'Cloud Kitchen & UMKM',
+    desc: 'Cloud kitchen butuh fleksibilitas order kecil-sedang dengan harga petani. Kami support minimum order ramah UMKM.',
+  },
+  {
+    icon: GraduationCap,
+    title: 'Kantin Kampus & Katering Mahasiswa',
+    desc: 'Kantin UI & katering mahasiswa butuh sayur volume besar dengan harga terjangkau dan pengiriman subuh.',
+  },
+  {
+    icon: ChefHat,
+    title: 'Resto Keluarga & Katering Rumahan',
+    desc: 'Resto keluarga & katering hajatan butuh beragam sayur dengan grading konsisten dan jadwal yang fleksibel.',
+  },
+];
+
+const depokLegal = [
+  'Faktur pajak elektronik resmi (PKP) untuk kebutuhan audit internal.',
+  'Termin pembayaran 7 hari (Net 7) untuk klien baru.',
+  'Term of Payment (TOP) hingga 30 hari untuk klien kontrak rutin.',
+  'Minimum order fleksibel — cocok untuk UMKM & cloud kitchen.',
+  'Kontrak suplai jangka panjang dengan harga yang di-lock per kuartal.',
+];
+
+// Sayur unggulan — untuk cafe & UMKM
+const vegetables = [
+  {
+    name: 'Selada Romaine',
+    desc: 'Daun utuh, crispy. Favorit cafe untuk salad & burger topping.',
+    img: 'https://images.unsplash.com/photo-1622206151226-18ca2c9ab4a1?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Tomat Merah',
+    desc: 'Matang pohon, tidak lembek. Cocok untuk sandwich & saus cafe.',
+    img: 'https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Brokoli Hijau',
+    desc: 'Grade A, kuntum rapat. Untuk menu western food & pasta.',
+    img: 'https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Paprika Merah',
+    desc: 'Tebal, manis. Untuk plating resto & menu kontinental.',
+    img: 'https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Wortel Brastagi',
+    desc: 'Manis alami, warna oranye cerah. Cocok sup & tumis UMKM.',
+    img: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Buncis Muda',
+    desc: 'Renyah, tanpa serat kasar. Favorit tumis & capcay UMKM.',
+    img: 'https://images.unsplash.com/photo-1567375698348-5d9d5ae99de0?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Bayam Hijau',
+    desc: 'Daun lebar, batang muda. Ideal untuk menu sayur bening harian.',
+    img: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=600&q=80&auto=format&fit=crop',
+  },
+  {
+    name: 'Kubis Hijau',
+    desc: 'Padat, berlapis rapi. Cocok untuk tumis & capcay volume besar.',
+    img: 'https://images.unsplash.com/photo-1594282486552-05b4d80fbb9f?w=600&q=80&auto=format&fit=crop',
+  },
+];
 ---
 
 <MainLayout title={title} description={description}>
+  <script
+    type="application/ld+json"
+    slot="head"
+    set:html={JSON.stringify(jsonLd)}
+  />
 
-  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
-
-  <div class="bg-white text-[#052c17] font-sans antialiased overflow-x-hidden reveal-container">
+  <div class="bg-white text-[#052c17] font-sans antialiased overflow-x-hidden">
     <Header />
     <CityHero city={city} />
 
-    <main>
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 space-y-8 sm:space-y-10">
 
-      <section class="py-16 bg-white border-t border-slate-50">
-        <div class="max-w-4xl mx-auto px-6">
-          <article class="prose prose-green max-w-none reveal-up">
-            <h2 class="text-3xl md:text-5xl font-black uppercase mb-8 text-[#052c17] tracking-tighter">
-              Supplier Sayur Depok Terpercaya untuk Restoran, Hotel, & Supermarket
-            </h2>
-
-            <p class="text-lg text-slate-700 leading-relaxed mb-10 font-medium">
-              Dalam ekosistem bisnis kuliner yang sangat kompetitif di wilayah Depok, kualitas bahan baku segar merupakan fondasi utama keberhasilan operasional harian. CV Green Fresh Cipanas memahami tantangan besar yang dihadapi oleh para pengelola Cafe, UMKM Kuliner, & Restoran Keluarga dalam mendapatkan pasokan sayur mayur yang konsisten dan berkualitas tinggi. Dengan mengandalkan hasil panen langsung dari lahan pertanian subur di dataran tinggi Cipanas, kami hadir sebagai mitra strategis yang menjembatani kebutuhan sayuran segar dengan efisiensi logistik yang tak tertandingi. Area layanan distribusi kami kini mencakup seluruh titik vital di Depok, mulai dari kawasan Margonda, Cimanggis, Sawangan, Cinere, Beji, guna memastikan setiap dapur profesional menerima produk dengan standar kesegaran terbaik langsung dari sumbernya tanpa melalui banyak perantara.
-            </p>
-
-            <div class="mb-10">
-              <h3 class="text-2xl font-bold text-[#15803d] uppercase mb-4 tracking-tight">
-                Standar Kurasi Produk Sayur Terbaik untuk Cafe, UMKM Kuliner, & Restoran Keluarga
-              </h3>
-              <p class="text-slate-600 leading-relaxed">
-                Kami menerapkan protokol Quality Control yang sangat ketat untuk memastikan setiap jenis komoditas memenuhi standar tinggi industri kuliner saat ini. Di wilayah Depok, kebutuhan akan supplier sayur cafe, distributor sayur depok, sayur segar umkm menuntut ketelitian yang sangat tinggi, mulai dari tahap sortasi manual hingga pengemasan akhir yang aman. Produk sayuran hijau kami dipanen pada waktu yang paling optimal dan segera melalui proses pendinginan untuk menjaga tekstur renyah (crispy) dan kandungan nutrisi alaminya. Bagi mitra katering, hotel, hingga supermarket, kami menyediakan opsi kustomisasi potongan atau pembersihan (pre-cut) yang dirancang untuk mempercepat proses prapengolahan di dapur Anda. Dedikasi kami pada kualitas menjadikan kami sebagai pilihan utama bagi unit bisnis yang sangat mengutamakan kepuasan pelanggan dan tidak mentoleransi adanya rejection rate yang tinggi pada setiap pengiriman barang.
-              </p>
-            </div>
-
-            <div class="mb-10">
-              <h3 class="text-2xl font-bold text-[#15803d] uppercase mb-4 tracking-tight">
-                Infrastruktur Logistik Modern dan Fleksibilitas Kerjasama Perusahaan
-              </h3>
-              <p class="text-slate-600 leading-relaxed">
-                Kelancaran operasional harian bisnis Anda di Depok sangat bergantung pada ketepatan waktu distribusi. Dengan dukungan infrastruktur Fleksibilitas Order Harian Jalur Bogor, armada distribusi kami bergerak setiap subuh untuk menembus jalur-jalur sibuk di Depok guna memastikan barang tiba sebelum puncak aktivitas dapur dimulai. Selain keunggulan pada sisi logistik, Green Fresh menawarkan skema kerjasama profesional berupa sistem pembayaran tempo atau Term of Payment (TOP) hingga 30 hari. Skema ini dirancang khusus untuk mendukung kesehatan arus kas korporasi dan memberikan fleksibilitas finansial yang lebih baik bagi para mitra. Kami juga menjamin transparansi administrasi secara menyeluruh dengan status pengusaha kena pajak (PKP) resmi serta penyediaan faktur pajak elektronik, sehingga sangat memudahkan proses audit internal dan manajemen keuangan bagi perusahaan mitra di seluruh wilayah Depok.
-              </p>
-            </div>
-
-            <div class="mt-12 p-8 bg-[#f7faf7] rounded-3xl border-2 border-green-100 italic text-slate-700">
-              Memilih CV Green Fresh Cipanas berarti Anda sedang berinvestasi pada stabilitas stok dan konsistensi kualitas rasa pada setiap sajian menu Anda. Kami berkomitmen penuh untuk terus menjadi pilar pendukung bagi pertumbuhan industri restoran, hotel, supermarket, dan unit katering di Depok dengan menyediakan pasokan sayur mayur yang stabil sepanjang tahun, bahkan di tengah tantangan cuaca ekstrem. Jangan ragu untuk segera menghubungi tim pemasaran kami guna mendiskusikan draf skema suplai yang paling efisien dan menguntungkan bagi pertumbuhan bisnis kuliner Anda hari ini.
-            </div>
-          </article>
+      <!-- ============ SECTION 1: INTRO ============ -->
+      <section>
+        <span class="inline-flex items-center gap-1.5 text-[10px] font-black uppercase tracking-widest text-[#166534] bg-green-50 border border-green-200 px-2.5 py-1 rounded-full mb-3">
+          <MapPin size={10} /> {city.name}, Jawa Barat
+        </span>
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-black text-[#052c17] tracking-tight leading-tight mb-4">
+          Supplier Sayur {city.name} untuk Cafe, Cloud Kitchen & UMKM Kuliner
+        </h2>
+        <div class="space-y-3 text-slate-700 leading-relaxed">
+          <p>
+            {city.angle} CV Green Fresh Cipanas paham ritme bisnis kuliner
+            Depok yang sangat khas anak muda: cafe di Margonda butuh selada
+            fresh untuk menu brunch sebelum jam 8 pagi, sementara cloud
+            kitchen di Sukmajaya butuh fleksibilitas order kecil tapi
+            konsisten setiap hari. {city.deliveryRoute} {city.seoContent}
+          </p>
+          <p>
+            Kami fokus pada satu hal yang paling sering dilupakan supplier
+            besar: <strong>fleksibilitas untuk UMKM</strong>. Bukan sekadar
+            "harga grosir", tapi harga petani dengan minimum order yang ramah
+            warung kecil dan cloud kitchen. {city.usp}
+          </p>
         </div>
       </section>
 
-      <div class="py-10 reveal-up">
-        <div class="max-w-[1800px] mx-auto px-6">
-          <CityClientPage city={city} vegetableData={vegetableData} />
-        </div>
-      </div>
-
-      <section class="py-20 bg-slate-50 border-t border-green-100">
-        <div class="max-w-[1800px] mx-auto px-6">
-          <div class="mb-12">
-            <h3 class="text-xs font-black text-[#166534] uppercase tracking-[0.4em] flex items-center gap-3">
-              <MapPin size={14} /> Jangkauan Kami
+      <!-- ============ SECTION 2: SLIDER PRODUK ============ -->
+      <section>
+        <div class="flex items-end justify-between gap-3 mb-4">
+          <div class="min-w-0">
+            <h3 class="text-lg sm:text-xl font-bold text-[#052c17] flex items-center gap-2">
+              <Leaf size={18} class="text-[#166534]" /> Sayuran Segar untuk Cafe & UMKM
             </h3>
-
-            <h2 class="text-3xl font-black uppercase text-[#052c17]">
-              Area Sekitar {city.name}
-            </h2>
+            <p class="text-sm text-slate-600 mt-1">
+              Dipanen pagi, dikirim subuh, sampai dapur Anda sebelum jam 7.
+            </p>
           </div>
+          <div class="hidden sm:flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              data-slider-prev
+              aria-label="Sebelumnya"
+              class="w-9 h-9 rounded-full border border-slate-300 bg-white hover:bg-green-50 hover:border-[#166534] active:scale-95 transition flex items-center justify-center text-[#052c17]"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            </button>
+            <button
+              type="button"
+              data-slider-next
+              aria-label="Berikutnya"
+              class="w-9 h-9 rounded-full border border-slate-300 bg-white hover:bg-green-50 hover:border-[#166534] active:scale-95 transition flex items-center justify-center text-[#052c17]"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><polyline points="9 18 15 12 9 6"></polyline></svg>
+            </button>
+          </div>
+        </div>
 
-          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {otherCities.map((otherCity) => (
-              <a href={`/kota/${otherCity.slug}`} class="group p-6 rounded-2xl border bg-white hover:bg-green-50 transition text-center">
-                <span class="text-xs font-black uppercase tracking-wider group-hover:text-[#166534]">
-                  {otherCity.name}
+        <div
+          id="veggie-slider"
+          class="flex overflow-x-auto snap-x snap-mandatory gap-3 pb-2 scrollbar-hide scroll-smooth"
+        >
+          {vegetables.map((v) => (
+            <article class="snap-start shrink-0 w-[240px] sm:w-[260px] rounded-xl overflow-hidden border border-slate-200 bg-white hover:shadow-md hover:border-[#166534]/30 transition">
+              <div class="relative h-40 sm:h-44 bg-slate-100">
+                <img
+                  src={v.img}
+                  alt={v.name}
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-full object-cover"
+                />
+                <span class="absolute top-2 left-2 text-[9px] font-black uppercase tracking-wider bg-white/95 text-[#166534] border border-green-200 px-2 py-0.5 rounded">
+                  Fresh
                 </span>
-              </a>
+              </div>
+              <div class="p-3">
+                <h4 class="font-bold text-sm text-[#052c17] mb-0.5">
+                  {v.name}
+                </h4>
+                <p class="text-[11px] text-slate-600 leading-snug">
+                  {v.desc}
+                </p>
+              </div>
+            </article>
+          ))}
+        </div>
+
+        <p class="text-[10px] text-slate-400 mt-2 text-center sm:hidden">
+          ← geser untuk lihat lainnya →
+        </p>
+      </section>
+
+      <!-- ============ SECTION 3: TIPE KLIEN ============ -->
+      <section>
+        <div class="mb-4">
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17]">
+            Tipe Klien di {city.name}
+          </h3>
+          <p class="text-sm text-slate-600 mt-1">
+            {city.clientFocus} — masing-masing punya pola order, jadwal, dan
+            jenis sayur favorit berbeda.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {depokClientTypes.map((c) => (
+            <div class="flex items-start gap-3 p-4 rounded-xl border border-slate-200 border-l-4 border-l-[#166534] bg-white hover:bg-green-50/40 hover:shadow-sm transition">
+              <div class="w-9 h-9 rounded-lg bg-[#166534] text-white flex items-center justify-center shrink-0">
+                <c.icon size={16} />
+              </div>
+              <div class="min-w-0">
+                <h4 class="font-bold text-sm text-[#052c17] mb-1">
+                  {c.title}
+                </h4>
+                <p class="text-xs text-slate-600 leading-relaxed">
+                  {c.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ SECTION 4: KAWASAN + TIMELINE (2 kolom) ============ -->
+      <section class="grid md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17] mb-3 flex items-center gap-2">
+            <Factory size={18} class="text-[#166534]" /> Kawasan Kuliner Depok
+          </h3>
+          <p class="text-sm text-slate-600 mb-3">
+            Depok punya karakter unik: kota kafe, kota kampus, dan kota
+            perumahan. Kami sudah terbiasa melayani:
+          </p>
+          <ul class="space-y-2">
+            {depokIndustri.map((z) => (
+              <li class="flex items-start gap-2.5 p-3 rounded-lg bg-slate-50 border border-slate-100">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#166534] mt-2 shrink-0"></span>
+                <div>
+                  <strong class="text-sm text-[#052c17]">{z.name}</strong>
+                  <p class="text-xs text-slate-600 leading-snug mt-0.5">
+                    {z.note}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17] mb-3 flex items-center gap-2">
+            <Clock size={18} class="text-[#166534]" /> Timeline Distribusi Subuh
+          </h3>
+          <p class="text-sm text-slate-600 mb-3">
+            Cafe buka jam 8, resto jam 10. Kami kirim sebelum itu. Berikut
+            jadwal operasional kami:
+          </p>
+          <div class="space-y-2">
+            {city.logistics.map((l) => (
+              <div class="flex items-start gap-3 p-3 rounded-lg bg-white border border-slate-200">
+                <div class="shrink-0 text-center">
+                  <span class="inline-block text-xs font-mono font-bold text-[#166534] bg-green-50 border border-green-200 rounded px-2 py-0.5">
+                    {l.time}
+                  </span>
+                </div>
+                <div>
+                  <strong class="text-sm text-[#052c17]">{l.title}</strong>
+                  <p class="text-xs text-slate-600 leading-snug mt-0.5">
+                    {l.desc}
+                  </p>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
+
+      <!-- ============ SECTION 5: LEGALITAS ============ -->
+      <section>
+        <h3 class="text-lg sm:text-xl font-bold text-[#052c17] mb-3 flex items-center gap-2">
+          <ShieldCheck size={18} class="text-[#166534]" /> Legalitas & Administrasi Perusahaan
+        </h3>
+        <div class="grid sm:grid-cols-2 gap-2.5">
+          {depokLegal.map((item) => (
+            <div class="flex items-start gap-2.5 p-3 rounded-lg bg-green-50/60 border border-green-100">
+              <CheckCircle2 size={14} class="text-[#166534] mt-0.5 shrink-0" />
+              <span class="text-sm text-slate-700 leading-snug">{item}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ SECTION 6: ZONA KECAMATAN ============ -->
+      <section>
+        <div class="mb-3">
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17] flex items-center gap-2">
+            <MapPin size={18} class="text-[#166534]" /> Zona Pengiriman — Depok & Sekitarnya
+          </h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Jadwal dan minimum order disesuaikan dengan karakter tiap zona.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
+          {depokZones.map((z) => (
+            <div class="p-3 rounded-lg border border-slate-200 bg-white hover:border-[#166534] hover:bg-green-50/40 transition">
+              <div class="font-bold text-xs text-[#052c17] mb-0.5">
+                {z.name}
+              </div>
+              <div class="text-[11px] text-slate-600 leading-snug">
+                {z.note}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ SECTION 7: AREA SEKITAR ============ -->
+      <section>
+        <div class="mb-3">
+          <h3 class="text-lg sm:text-xl font-bold text-[#052c17] flex items-center gap-2">
+            <Truck size={18} class="text-[#166534]" /> Area Sekitar {city.name}
+          </h3>
+          <p class="text-sm text-slate-600 mt-1">
+            Kami juga melayani kota-kota berikut dengan pola pengiriman yang
+            sama.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+          {otherCities.map((otherCity) => (
+            <a
+              href={`/kota/${otherCity.slug}`}
+              class="group p-3 rounded-lg border border-slate-200 bg-white hover:border-[#166534] hover:bg-green-50 transition text-center"
+            >
+              <span class="text-xs font-bold uppercase tracking-wide text-[#052c17] group-hover:text-[#166534]">
+                {otherCity.name}
+              </span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- ============ SECTION 8: CONTACT FORM + TERMIN 7 HARI ============ -->
+      <section id="kontak" class="scroll-mt-20">
+        <div class="rounded-2xl border-2 border-[#166534] bg-gradient-to-br from-[#f0fdf4] to-white overflow-hidden">
+
+          <!-- Header form -->
+          <div class="p-5 sm:p-6 border-b-2 border-[#166534]/20 bg-[#166534]">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-lg bg-white/15 backdrop-blur flex items-center justify-center shrink-0">
+                <Send size={18} class="text-white" />
+              </div>
+              <div>
+                <h3 class="text-lg sm:text-xl font-bold text-white">
+                  Minta Penawaran Suplai {city.name}
+                </h3>
+                <p class="text-xs sm:text-sm text-green-100 mt-0.5">
+                  Isi form — tim kami balas via WhatsApp dalam 1×24 jam kerja.
+                </p>
+              </div>
+            </div>
+
+            <!-- Badge Termin 7 Hari -->
+            <div class="mt-4 inline-flex items-center gap-2 bg-yellow-300 text-[#052c17] border border-yellow-400 rounded-lg px-3 py-1.5">
+              <CalendarClock size={14} />
+              <span class="text-xs font-bold">
+                Termin Pembayaran 7 Hari untuk Klien Baru
+              </span>
+            </div>
+          </div>
+
+          <!-- Form body -->
+          <form
+            id="kontak-form"
+            class="p-5 sm:p-6 space-y-4"
+            data-wa={waNumber}
+            data-kota={city.name}
+            novalidate
+          >
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="nama" class="block text-xs font-bold text-[#052c17] mb-1">
+                  Nama Lengkap <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="nama"
+                  name="nama"
+                  required
+                  autocomplete="name"
+                  placeholder="Budi Santoso"
+                  class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+                />
+              </div>
+
+              <div>
+                <label for="usaha" class="block text-xs font-bold text-[#052c17] mb-1">
+                  Nama Usaha / Cafe <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="usaha"
+                  name="usaha"
+                  required
+                  autocomplete="organization"
+                  placeholder="Kopi Senja Margonda"
+                  class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+                />
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label for="whatsapp" class="block text-xs font-bold text-[#052c17] mb-1">
+                  No. WhatsApp <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="whatsapp"
+                  name="whatsapp"
+                  required
+                  inputmode="numeric"
+                  pattern="[0-9+\s-]{8,18}"
+                  autocomplete="tel"
+                  placeholder="08xx xxxx xxxx"
+                  class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+                />
+              </div>
+
+              <div>
+                <label for="zona" class="block text-xs font-bold text-[#052c17] mb-1">
+                  Zona Pengiriman <span class="text-rose-500">*</span>
+                </label>
+                <select
+                  id="zona"
+                  name="zona"
+                  required
+                  class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+                >
+                  <option value="">— Pilih zona —</option>
+                  {depokZones.map((z) => (
+                    <option value={z.name}>{z.name}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="kebutuhan" class="block text-xs font-bold text-[#052c17] mb-1">
+                Kebutuhan Sayur <span class="text-rose-500">*</span>
+              </label>
+              <textarea
+                id="kebutuhan"
+                name="kebutuhan"
+                required
+                rows="3"
+                placeholder="Contoh: Selada 5 kg/hari, Tomat 3 kg/hari, Paprika 2 kg/hari untuk menu brunch cafe."
+                class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition resize-y"
+              ></textarea>
+            </div>
+
+            <div>
+              <label for="volume" class="block text-xs font-bold text-[#052c17] mb-1">
+                Estimasi Volume Harian <span class="text-slate-400 font-normal">(opsional)</span>
+              </label>
+              <input
+                type="text"
+                id="volume"
+                name="volume"
+                placeholder="Contoh: ±15 kg per hari"
+                class="w-full px-3 py-2.5 text-sm rounded-lg border border-slate-300 bg-white focus:border-[#166534] focus:ring-2 focus:ring-[#166534]/20 outline-none transition"
+              />
+            </div>
+
+            <!-- Checkbox termin 7 hari -->
+            <div class="p-3 rounded-lg bg-yellow-50 border border-yellow-200">
+              <label class="flex items-start gap-2.5 cursor-pointer">
+                <input
+                  type="checkbox"
+                  id="termin7"
+                  name="termin7"
+                  required
+                  class="mt-0.5 w-4 h-4 rounded border-slate-300 text-[#166534] focus:ring-[#166534]"
+                />
+                <span class="text-xs text-slate-700 leading-relaxed">
+                  Saya setuju dengan skema <strong>termin pembayaran 7 hari (Net 7)</strong> untuk transaksi pertama, dengan syarat & ketentuan yang berlaku.
+                </span>
+              </label>
+            </div>
+
+            <!-- Error message -->
+            <div
+              id="form-error"
+              class="hidden p-3 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700"
+              role="alert"
+            ></div>
+
+            <button
+              type="submit"
+              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#166534] text-white font-bold text-sm hover:bg-[#14532d] active:scale-[0.98] transition shadow-md"
+            >
+              <Send size={16} /> Kirim via WhatsApp
+            </button>
+
+            <p class="text-[10px] text-slate-500 leading-relaxed">
+              Dengan mengirim form ini, Anda akan diarahkan ke WhatsApp kami
+              dengan pesan yang sudah terisi otomatis. Tim marketing akan
+              membalas dalam 1×24 jam kerja.
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <!-- ============ CTA PENUTUP ============ -->
+      <section class="p-5 sm:p-6 rounded-2xl bg-gradient-to-br from-[#f0fdf4] to-[#dcfce7] border-2 border-green-200">
+        <p class="text-sm sm:text-base text-slate-700 leading-relaxed italic">
+          Untuk cafe dan UMKM di Depok, memilih supplier bukan soal harga
+          termurah — tapi soal siapa yang bisa hadir konsisten setiap subuh
+          dengan fleksibilitas order yang ramah UMKM. Kalau Anda mengelola
+          cafe, cloud kitchen, kantin kampus, atau katering di Depok, isi
+          form di atas atau hubungi tim pemasaran kami untuk diskusi skema
+          suplai yang paling efisien.
+        </p>
+      </section>
+
     </main>
 
     <Footer />
   </div>
 </MainLayout>
 
+<script is:inline>
+  (function () {
+    // ---- Slider ----
+    const slider = document.getElementById('veggie-slider');
+    if (slider) {
+      const scrollAmount = 280;
+      document.querySelectorAll('[data-slider-prev]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          slider.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+      });
+      document.querySelectorAll('[data-slider-next]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          slider.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+      });
+    }
+
+    // ---- Contact Form -> WhatsApp ----
+    const form = document.getElementById('kontak-form');
+    if (!form) return;
+
+    const waNumber = form.getAttribute('data-wa') || '6287780937884';
+    const kota = form.getAttribute('data-kota') || 'Depok';
+    const errorBox = document.getElementById('form-error');
+
+    function showError(msg) {
+      if (!errorBox) return;
+      errorBox.textContent = msg;
+      errorBox.classList.remove('hidden');
+    }
+
+    function hideError() {
+      if (!errorBox) return;
+      errorBox.classList.add('hidden');
+      errorBox.textContent = '';
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      hideError();
+
+      const nama = form.querySelector('#nama').value.trim();
+      const usaha = form.querySelector('#usaha').value.trim();
+      const whatsapp = form.querySelector('#whatsapp').value.trim();
+      const zona = form.querySelector('#zona').value;
+      const kebutuhan = form.querySelector('#kebutuhan').value.trim();
+      const volume = form.querySelector('#volume').value.trim();
+      const termin7 = form.querySelector('#termin7').checked;
+
+      if (!nama || !usaha || !whatsapp || !zona || !kebutuhan) {
+        showError('Mohon lengkapi semua field bertanda * sebelum mengirim.');
+        return;
+      }
+
+      if (!termin7) {
+        showError('Centang persetujuan termin 7 hari untuk melanjutkan.');
+        return;
+      }
+
+      const lines = [
+        '*PENAWARAN SUPLAI SAYUR - ' + kota.toUpperCase() + '*',
+        '',
+        'Nama: ' + nama,
+        'Usaha: ' + usaha,
+        'WhatsApp: ' + whatsapp,
+        'Zona: ' + zona,
+        'Kebutuhan: ' + kebutuhan,
+      ];
+      if (volume) lines.push('Volume: ' + volume);
+      lines.push('');
+      lines.push('Skema pembayaran: Termin 7 hari (disetujui)');
+      lines.push('');
+      lines.push('Mohon info harga dan ketersediaan stok.');
+
+      const text = encodeURIComponent(lines.join('\n'));
+      const url = 'https://wa.me/' + waNumber + '?text=' + text;
+
+      window.open(url, '_blank', 'noopener,noreferrer');
+    });
+  })();
+</script>
+
 <style>
-.reveal-up {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all .8s cubic-bezier(.16,1,.3,1);
-}
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 </style>

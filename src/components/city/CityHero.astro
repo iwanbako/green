@@ -1,95 +1,135 @@
 ---
 /**
- * CITY HERO - ASTRO VERSION (Fluid Typography & Textural Depth)
+ * CITY HERO - ASTRO VERSION
+ * Redesign: Hierarchy jelas, tipografi konsisten, visual bersih.
  */
-import { MapPin, ArrowRight, ShieldCheck, Truck } from 'lucide-react';
+import { MapPin, ArrowRight, ShieldCheck, Truck, CheckCircle2 } from 'lucide-react';
 
 const { city } = Astro.props;
 const cityName = city?.name || 'Seluruh Wilayah';
 const seoContent = city?.seoContent || null;
 
 const heroImageUrl = "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&q=80&w=1200";
+
+const trustPoints = [
+  'Panen pagi, kirim subuh',
+  'Grade A tersortasi',
+  'Legalitas PKP resmi',
+];
 ---
 
-<section class="relative min-h-[85vh] lg:min-h-[90vh] flex items-center overflow-hidden font-sans bg-[#052c17] reveal-container">
-  
-  <div class="absolute inset-0 z-0">
-    <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_30%,rgba(21,128,61,0.2)_0%,transparent_70%)]"></div>
-    <div class="absolute -top-24 -left-24 w-96 h-96 bg-[#bef264]/10 rounded-full blur-[100px]"></div>
+<section class="relative overflow-hidden font-sans bg-[#052c17] text-white">
+  <!-- Background decoration (subtle) -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-emerald-500/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#bef264]/5 rounded-full blur-3xl"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(21,128,61,0.15)_0%,transparent_60%)]"></div>
   </div>
 
-  <div class="w-full max-w-[1920px] mx-auto relative z-10">
-    <div class="flex flex-col lg:flex-row items-stretch">
-      
-      <div class="w-full lg:w-7/12 px-6 md:px-16 lg:px-20 py-12 lg:py-24 flex flex-col justify-center text-white">
-        
-        <div class="max-w-4xl space-y-8 lg:space-y-12">
-          <div class="flex items-center gap-4 reveal-left">
-            <div class="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md">
-              <MapPin size={14} class="text-[#bef264]" />
-              <span class="text-[10px] lg:text-[12px] font-black text-[#bef264] uppercase tracking-[0.2em]">{cityName} HUB</span>
-            </div>
-            <span class="text-[10px] font-bold uppercase tracking-[0.3em] text-white/30 hidden sm:block">Grade A Specialist</span>
-          </div>
+  <div class="relative max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+    <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
 
-          <div class="relative">
-            <h1 class="text-[clamp(3.5rem,8vw,8.5rem)] font-black leading-[0.9] tracking-[-0.03em] uppercase reveal-up">
-              Supplier <br />
-              <span class="text-[#bef264] italic font-serif lowercase tracking-tight opacity-90">Sayur</span> 
-              <span class="block">{cityName}.</span>
-            </h1>
-            <div class="w-24 h-2 bg-[#bef264] mt-6 rounded-full reveal-left" style="transition-delay: 0.4s;"></div>
-          </div>
+      <!-- LEFT: Content -->
+      <div class="lg:col-span-7 space-y-6 sm:space-y-8">
 
-          <div class="relative reveal-up" style="transition-delay: 0.1s;">
-            <p class="text-lg lg:text-2xl text-slate-300 font-medium leading-relaxed max-w-2xl border-l-4 border-[#bef264]/40 pl-6 lg:pl-10">
-              Distribusi sayuran segar hasil panen <span class="text-white">Cipanas</span> untuk kebutuhan hotel, resto, dan katering di wilayah <span class="text-[#bef264]">{cityName}</span>.
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/10 rounded-full backdrop-blur-sm">
+          <MapPin size={13} class="text-[#bef264]" />
+          <span class="text-[11px] font-bold text-[#bef264] uppercase tracking-wider">
+            {cityName} Hub
+          </span>
+        </div>
+
+        <!-- H1 -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.05] tracking-tight text-white">
+          Supplier Sayur{' '}
+          <span class="text-[#bef264]">{cityName}</span>
+        </h1>
+
+        <!-- Subtitle -->
+        <p class="text-base sm:text-lg lg:text-xl text-slate-300 leading-relaxed max-w-2xl">
+          Distribusi sayuran segar hasil panen Cipanas untuk hotel, restoran,
+          katering, dan food court di wilayah {cityName}. Pengiriman subuh
+          dengan rantai dingin terjaga.
+        </p>
+
+        <!-- SEO Content quote (optional) -->
+        {seoContent && (
+          <div class="max-w-2xl border-l-2 border-[#bef264]/40 pl-4 sm:pl-5">
+            <p class="text-sm sm:text-base text-slate-400 leading-relaxed italic">
+              {seoContent}
             </p>
           </div>
+        )}
 
-          {seoContent && (
-            <div class="max-w-2xl bg-gradient-to-r from-white/5 to-transparent p-6 rounded-3xl border-l border-white/10 backdrop-blur-sm reveal-up" style="transition-delay: 0.2s;">
-              <p class="text-sm lg:text-base text-slate-400 leading-relaxed italic font-light">
-                &quot;{seoContent}&quot;
-              </p>
-            </div>
-          )}
+        <!-- CTA Buttons -->
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
+          <a
+            href="#katalog"
+            class="group inline-flex items-center justify-center gap-2 bg-[#bef264] hover:bg-[#a8e04a] text-[#052c17] px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl text-sm font-bold uppercase tracking-wide transition-all shadow-lg shadow-[#bef264]/20 active:scale-95"
+          >
+            Cek Katalog Produk
+            <ArrowRight size={18} class="group-hover:translate-x-1 transition-transform" />
+          </a>
+          <a
+            href="#kemitraan"
+            class="inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl text-sm font-bold uppercase tracking-wide border border-white/15 hover:border-white/30 transition-all active:scale-95"
+          >
+            Hubungi Sales
+          </a>
+        </div>
 
-          <div class="flex flex-wrap gap-4 lg:gap-6 pt-4 reveal-up" style="transition-delay: 0.3s;">
-            <a href="#katalog" class="group relative overflow-hidden bg-[#bef264] text-[#052c17] px-10 py-6 rounded-2xl text-xs font-black uppercase tracking-widest transition-all hover:shadow-[0_0_40px_rgba(190,242,100,0.3)]">
-              <span class="relative z-10 flex items-center gap-3">
-                Cek Katalog Produk <ArrowRight size={18} class="group-hover:translate-x-2 transition-transform" />
+        <!-- Trust Points -->
+        <div class="flex flex-wrap gap-x-6 gap-y-2 pt-4">
+          {trustPoints.map((point) => (
+            <div class="flex items-center gap-2">
+              <CheckCircle2 size={16} class="text-[#bef264] shrink-0" />
+              <span class="text-xs sm:text-sm text-slate-300 font-medium">
+                {point}
               </span>
-            </a>
-            <a href="#kemitraan" class="group px-10 py-6 rounded-2xl text-xs font-black uppercase tracking-widest text-white border-2 border-white/10 hover:border-white hover:bg-white/5 transition-all">
-              Hubungi Sales
-            </a>
-          </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div class="w-full lg:w-5/12 relative min-h-[450px] lg:min-h-0 flex items-center justify-center p-6 lg:p-12 reveal-scale">
-        <div class="relative w-full h-full max-h-[700px] overflow-hidden rounded-[2.5rem] lg:rounded-[4rem] group shadow-2xl shadow-black/50">
-          <img 
-            src={heroImageUrl} 
+      <!-- RIGHT: Image -->
+      <div class="lg:col-span-5 relative">
+        <div class="relative aspect-[4/5] sm:aspect-[3/4] lg:aspect-[4/5] max-w-md mx-auto lg:max-w-none rounded-2xl overflow-hidden shadow-2xl shadow-black/40 border border-white/10">
+          <img
+            src={heroImageUrl}
             alt={`Supplier Sayur Segar Green Fresh Cipanas di ${cityName}`}
-            class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[2s]"
+            class="w-full h-full object-cover"
             loading="eager"
+            fetchpriority="high"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-[#052c17]/80 via-transparent to-transparent opacity-60"></div>
-          
-          <div class="absolute bottom-8 left-8 right-8">
-            <div class="bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-3xl">
-              <div class="flex items-center gap-5">
-                <div class="p-3 bg-[#bef264] rounded-2xl text-[#052c17]">
-                  <ShieldCheck size={24} />
+          <!-- Gradient overlay -->
+          <div class="absolute inset-0 bg-gradient-to-t from-[#052c17] via-[#052c17]/30 to-transparent"></div>
+
+          <!-- Bottom card -->
+          <div class="absolute bottom-4 left-4 right-4 sm:bottom-6 sm:left-6 sm:right-6">
+            <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-3 sm:p-4">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-lg bg-[#bef264] flex items-center justify-center shrink-0">
+                  <ShieldCheck size={20} class="text-[#052c17]" />
                 </div>
-                <div class="space-y-1">
-                  <p class="text-[9px] font-black text-[#bef264] uppercase tracking-widest">Quality Verified</p>
-                  <p class="text-sm lg:text-base font-bold text-white">Standar Operasional Horeka</p>
+                <div class="min-w-0">
+                  <p class="text-[10px] font-bold text-[#bef264] uppercase tracking-wider leading-none mb-1">
+                    Quality Verified
+                  </p>
+                  <p class="text-sm sm:text-base font-bold text-white leading-tight">
+                    Standar Operasional Horeka
+                  </p>
                 </div>
               </div>
             </div>
+          </div>
+
+          <!-- Top badge -->
+          <div class="absolute top-4 left-4 sm:top-6 sm:left-6">
+            <span class="inline-flex items-center gap-1.5 bg-[#052c17]/80 backdrop-blur-md border border-white/20 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-wider text-white">
+              <Truck size={12} class="text-[#bef264]" />
+              Fresh Daily
+            </span>
           </div>
         </div>
       </div>
@@ -97,36 +137,3 @@ const heroImageUrl = "https://images.unsplash.com/photo-1542838132-92c53300491e?
     </div>
   </div>
 </section>
-
-<style>
-  /* Mengatur Fluid Typography secara manual jika browser tidak support clamp */
-  h1 {
-    word-break: break-word;
-  }
-
-  /* Animasi */
-  .reveal-up, .reveal-left, .reveal-scale {
-    opacity: 1;
-    transform: none;
-    transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    :global(.js-enabled) .reveal-up { opacity: 0; transform: translateY(50px); }
-    :global(.js-enabled) .reveal-left { opacity: 0; transform: translateX(-50px); }
-    :global(.js-enabled) .reveal-scale { opacity: 0; transform: scale(0.9); }
-  }
-
-  :global(.is-visible) .reveal-up,
-  :global(.is-visible) .reveal-left,
-  :global(.is-visible).reveal-up,
-  :global(.is-visible).reveal-left {
-    opacity: 1 !important;
-    transform: translate(0) !important;
-  }
-  :global(.is-visible) .reveal-scale,
-  :global(.is-visible).reveal-scale {
-    opacity: 1 !important;
-    transform: scale(1) !important;
-  }
-</style>
