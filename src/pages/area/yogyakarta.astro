@@ -1,0 +1,546 @@
+---
+/**
+ * GENERATED FILE - DO NOT EDIT DIRECTLY
+ * Area: Yogyakarta
+ * Lokasi File: src/pages/area/yogyakarta.astro
+ */
+import MainLayout from '@/layouts/MainLayout.astro';
+import { Star, ChevronRight, MapPin, Clock, Truck, ShieldCheck, Leaf, Phone, CheckCircle2, TrendingUp, Users, ArrowRight, Send, Building2, User, MessageSquare, Wallet } from 'lucide-react';
+
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+
+const district = {
+  "slug": "yogyakarta",
+  "name": "Yogyakarta",
+  "origin": "CV Green Fresh Cipanas",
+  "title": "Supplier Sayur Yogyakarta - Grade A",
+  "angle": "Penyuplai sayuran untuk kota wisata budaya dengan industri kuliner, hospitality, dan cafe kreatif yang tinggi",
+  "seoContent": "Yogyakarta sebagai kota wisata budaya dan destinasi kuliner memiliki kebutuhan pasokan sayur yang tinggi dan fluktuatif mengikuti musim wisata. Restoran dan rumah makan khas Jogja membutuhkan bahan segar untuk menu harian yang konsisten. Hotel butik dan penginapan wisata memerlukan pasokan stabil untuk sarapan, jamuan, dan operasional dapur. Cafe kreatif dan kedai kopi membutuhkan produk segar untuk menu yang mendukung pengalaman wisata kuliner. Katering acara, pernikahan, dan event budaya di Yogyakarta membutuhkan kapasitas besar dengan koordinasi matang. Kami memahami dinamika industri kuliner dan pariwisata Yogyakarta dengan layanan yang fleksibel, terjadwal, dan terintegrasi.",
+  "metaDescription": "Supplier sayur Yogyakarta untuk restoran, hotel butik, cafe, dan katering. Pasokan segar grade A harian, logistik terjadwal via Tol Trans Jawa, dukungan untuk industri kuliner dan pariwisata Yogyakarta.",
+  "clientFocus": "Restoran Khas Jogja, Hotel Butik, Cafe Kreatif, Katering Acara, Pasar Modern & Supermarket",
+  "deliveryRoute": "Cipanas-Puncak-Cianjur-Purwakarta-Cikampek-Tol Trans Jawa-Yogyakarta",
+  "logistics": {
+    "time": "03.00-05.00 (panen), 06.00-08.00 (hotel & restoran), 12.00-14.00 (katering & pasar)",
+    "title": "Cultural Tourism Culinary Service",
+    "desc": "Jadwal pengiriman fleksibel mengikuti musim wisata, pemahaman kebutuhan industri kuliner dan hospitality Yogyakarta"
+  }
+};
+
+const baseUrl = 'https://greenfresh.co.id';
+const currentUrl = `${baseUrl}/area/${district.slug}`;
+const title = `Supplier Sayur ${district.name} - Stok Stabil Harian | CV Green Fresh Cipanas`;
+const description = `Supplier sayur segar tangan pertama wilayah ${district.name}. Melayani pengadaan komoditas grade A harian khusus Hotel, Restoran, dan Cafe wilayah ${district.name}.`;
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WholesaleStore",
+      "@id": `${baseUrl}/#organization`,
+      "name": "CV Green Fresh Cipanas",
+      "url": baseUrl,
+      "logo": { "@type": "ImageObject", "url": `${baseUrl}/logo.svg` }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Beranda", "item": baseUrl },
+        { "@type": "ListItem", "position": 2, "name": "Area", "item": `${baseUrl}/area` },
+        { "@type": "ListItem", "position": 3, "name": district.name, "item": currentUrl }
+      ]
+    }
+  ]
+};
+
+const stats = [
+  { value: "4.9", label: "Rating Area", icon: Star },
+  { value: "24/7", label: "Support Order", icon: Phone },
+  { value: "100%", label: "Grade A Fresh", icon: ShieldCheck },
+  { value: "11 Jam", label: "Dari Ladang", icon: Clock },
+];
+
+const services = [
+  {
+    title: "Restoran Khas Jogja",
+    desc: "Pasokan harian sayur segar untuk menu konsisten restoran dan rumah makan khas Yogyakarta.",
+    icon: Leaf,
+  },
+  {
+    title: "Hotel Butik",
+    desc: "Stok stabil untuk sarapan, jamuan, dan operasional dapur hotel butik dan penginapan wisata.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Cafe Kreatif",
+    desc: "Produk segar untuk menu cafe, kedai kopi, dan tempat makan kreatif di kawasan wisata Jogja.",
+    icon: Users,
+  },
+  {
+    title: "Katering & Pasar Modern",
+    desc: "Kapasitas besar untuk katering acara, pernikahan, event budaya, serta pasokan pasar modern dan supermarket.",
+    icon: TrendingUp,
+  },
+];
+
+const features = [
+  { title: "Panen Dini Hari", desc: "Sayur dipanen 03.00-05.00 agar tiba di dapur Anda dalam kondisi paling segar.", icon: Clock },
+  { title: "Logistik Trans Jawa", desc: "Rute Cipanas-Puncak-Cianjur-Purwakarta-Cikampek-Tol Trans Jawa-Yogyakarta dengan armada berpendingin.", icon: Truck },
+  { title: "Quality Control Ketat", desc: "Seleksi manual tekstur, warna, dan kebersihan sesuai standar sanitasi dapur profesional.", icon: ShieldCheck },
+  { title: "Kemitraan Fleksibel", desc: "Term of Payment, faktur pajak PKP resmi, dan legalitas transparan untuk audit mudah.", icon: CheckCircle2 },
+];
+
+const heroImage = "https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=1600&q=80";
+---
+
+<MainLayout title={title} description={description}>
+
+  <script type="application/ld+json" set:html={JSON.stringify(schemaData)} slot="head" />
+
+  <div class="bg-white text-[#052c17] font-sans antialiased overflow-x-hidden selection:bg-green-100 selection:text-green-900 text-left">
+    <Header />
+
+    <main>
+      <!-- Breadcrumb -->
+      <div class="pt-24 lg:pt-32 bg-white border-b border-slate-50">
+        <nav aria-label="Breadcrumb" class="max-w-[1800px] mx-auto px-6 py-4 flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em]">
+          <a href="/" class="text-[#166534]">Beranda</a>
+          <ChevronRight size={10} class="text-slate-400" />
+          <a href="/area" class="text-[#166534]">Area</a>
+          <ChevronRight size={10} class="text-slate-400" />
+          <span class="text-[#166534] font-bold tracking-widest uppercase">{district.name}</span>
+        </nav>
+      </div>
+
+      <!-- HERO SECTION (inline, gambar Unsplash) -->
+      <section class="relative bg-[#052c17] overflow-hidden">
+        <div class="absolute inset-0">
+          <img
+            src={heroImage}
+            alt={`Sayuran segar untuk supplier di ${district.name}`}
+            class="w-full h-full object-cover"
+            loading="eager"
+            fetchpriority="high"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-[#052c17]/95 via-[#052c17]/80 to-[#052c17]/40"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#052c17]/70 via-transparent to-transparent"></div>
+        </div>
+
+        <div class="relative max-w-[1800px] mx-auto px-6 py-20 md:py-28 lg:py-32">
+          <div class="max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm mb-6">
+              <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+              <span class="text-[10px] font-black uppercase tracking-[0.2em] text-green-200">
+                {district.origin} · Grade A
+              </span>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-black uppercase text-white tracking-tighter leading-[0.95] mb-6">
+              Supplier Sayur<br />
+              <span class="text-green-400">{district.name}.</span>
+            </h1>
+
+            <p class="text-lg md:text-xl text-green-50/90 font-medium leading-relaxed max-w-2xl mb-8">
+              {district.angle}. Melayani pengadaan komoditas grade A harian untuk restoran, hotel butik, cafe, katering, dan pasar modern di wilayah {district.name}.
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-10">
+              {district.clientFocus.split(', ').map((c) => (
+                <span class="px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur-sm">
+                  {c}
+                </span>
+              ))}
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3">
+              <a href="#kontak" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-green-500 text-[#052c17] text-xs font-black uppercase tracking-widest">
+                Konsultasi Sekarang <ArrowRight size={16} />
+              </a>
+              <a href="#layanan" class="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-white/10 border border-white/20 text-white text-xs font-black uppercase tracking-widest backdrop-blur-sm">
+                Lihat Layanan
+              </a>
+            </div>
+          </div>
+
+          <div class="hidden lg:block absolute right-6 bottom-12 w-72 p-6 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-md">
+            <div class="flex items-center gap-2 mb-4">
+              <MapPin size={16} class="text-green-400" />
+              <span class="text-[10px] font-black uppercase tracking-widest text-green-200">Rute Distribusi</span>
+            </div>
+            <p class="text-sm font-bold text-white leading-relaxed mb-4">{district.deliveryRoute}</p>
+            <div class="h-px bg-white/20 mb-4"></div>
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-[9px] font-black uppercase tracking-widest text-green-200">Rating</p>
+                <p class="text-xl font-black text-white">4.9</p>
+              </div>
+              <div class="flex items-center gap-0.5">
+                {[1, 2, 3, 4, 5].map((s) => (
+                  <Star key={s} size={12} class="text-amber-400 fill-amber-400" />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STATS BAR -->
+      <div class="w-full bg-gradient-to-r from-white to-[#f7faf7] py-8 border-y border-green-50/50">
+        <div class="max-w-[1800px] mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6">
+          {stats.map((s) => {
+            const Icon = s.icon;
+            return (
+              <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center shrink-0">
+                  <Icon size={20} class="text-[#15803d]" />
+                </div>
+                <div>
+                  <p class="text-xl font-black text-[#052c17] leading-none">{s.value}</p>
+                  <p class="text-[10px] font-bold uppercase tracking-widest text-slate-600 mt-1">{s.label}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <!-- OVERVIEW + LOGISTICS -->
+      <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-[1800px] mx-auto px-6 grid lg:grid-cols-12 gap-12 items-start">
+          <div class="lg:col-span-7">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-10 h-[2px] bg-[#15803d]"></div>
+              <h3 class="text-[10px] font-black text-[#15803d] uppercase tracking-[0.5em]">Profil Wilayah</h3>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-black uppercase text-[#052c17] mb-6 tracking-tighter leading-tight">
+              Supplier Sayur <span class="text-[#15803d]">Yogyakarta.</span>
+            </h2>
+            <p class="text-slate-600 leading-relaxed font-medium mb-4">{district.seoContent}</p>
+            <p class="text-slate-600 leading-relaxed font-medium">
+              Fokus klien kami di Yogyakarta meliputi <span class="font-bold text-[#052c17]">{district.clientFocus}</span>.
+              Setiap pengiriman melewati rute <span class="font-bold text-[#052c17]">{district.deliveryRoute}</span> dengan armada berpendingin dan jadwal yang telah disepakati.
+            </p>
+
+            <div class="flex flex-wrap gap-2 mt-8">
+              {district.clientFocus.split(', ').map((c) => (
+                <span class="px-3 py-1.5 rounded-full bg-green-50 border border-green-100 text-[11px] font-bold uppercase tracking-wider text-[#15803d]">
+                  {c}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="rounded-3xl border border-slate-100 bg-[#f8fafc] p-8 shadow-sm">
+              <h3 class="text-lg font-black uppercase tracking-tight text-[#052c17] mb-6 flex items-center gap-2">
+                <MapPin size={18} class="text-[#15803d]" /> Jadwal & Logistik
+              </h3>
+              <div class="space-y-5">
+                <div>
+                  <p class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">Waktu Pengiriman</p>
+                  <p class="text-sm font-bold text-[#052c17] leading-relaxed">{district.logistics.time}</p>
+                </div>
+                <div class="h-px bg-slate-200"></div>
+                <div>
+                  <p class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">Layanan</p>
+                  <p class="text-sm font-bold text-[#052c17]">{district.logistics.title}</p>
+                  <p class="text-sm text-slate-600 mt-1 leading-relaxed">{district.logistics.desc}</p>
+                </div>
+                <div class="h-px bg-slate-200"></div>
+                <div>
+                  <p class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">Rute Distribusi</p>
+                  <p class="text-sm font-bold text-[#052c17] leading-relaxed">{district.deliveryRoute}</p>
+                </div>
+              </div>
+              <a href="#kontak" class="mt-8 inline-flex items-center justify-center w-full px-6 py-3 rounded-xl bg-[#052c17] text-white text-xs font-black uppercase tracking-widest">
+                Konsultasi Pengiriman
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SERVICES GRID -->
+      <section id="layanan" class="py-16 md:py-24 bg-[#f8fafc] border-y border-slate-200">
+        <div class="max-w-[1800px] mx-auto px-6">
+          <div class="mb-12">
+            <h2 class="text-3xl md:text-4xl font-black uppercase text-[#052c17] tracking-tighter">
+              Segmen <span class="text-[#15803d]">Layanan.</span>
+            </h2>
+            <p class="text-slate-600 text-sm font-bold mt-2 uppercase tracking-widest">Disesuaikan untuk Kebutuhan Yogyakarta</p>
+          </div>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((s) => {
+              const Icon = s.icon;
+              return (
+                <div class="p-7 rounded-3xl bg-white border border-[#15803d] shadow-lg">
+                  <div class="w-12 h-12 rounded-2xl bg-[#15803d] border border-[#15803d] flex items-center justify-center mb-5">
+                    <Icon size={22} class="text-white" />
+                  </div>
+                  <h3 class="text-base font-black text-[#052c17] uppercase tracking-tight mb-2">{s.title}</h3>
+                  <p class="text-sm text-slate-600 leading-relaxed font-medium">{s.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURES -->
+      <section class="py-16 md:py-24 bg-white">
+        <div class="max-w-[1800px] mx-auto px-6">
+          <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-[2px] bg-[#15803d]"></div>
+                <h3 class="text-[10px] font-black text-[#15803d] uppercase tracking-[0.5em]">Keunggulan</h3>
+              </div>
+              <h2 class="text-3xl md:text-5xl font-black uppercase text-[#052c17] tracking-tighter leading-tight mb-6">
+                Kenapa <span class="text-[#15803d]">Kami?</span>
+              </h2>
+              <p class="text-slate-600 leading-relaxed font-medium">
+                Kami bukan sekadar pemasok — kami mitra operasional dapur Anda. Dari panen dini hari hingga pengiriman terjadwal
+                via Tol Trans Jawa, setiap proses dirancang untuk menjaga kesegaran dan konsistensi pasokan di Yogyakarta.
+              </p>
+              <div class="mt-8 p-6 rounded-2xl bg-green-50 border border-green-100">
+                <p class="text-sm font-bold text-[#052c17] leading-relaxed italic">
+                  "Kesegaran bukan janji, tapi kebutuhan operasional yang menentukan reputasi bisnis Anda."
+                </p>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2 gap-4">
+              {features.map((f) => {
+                const Icon = f.icon;
+                return (
+                  <div class="p-6 rounded-2xl border border-slate-100 bg-[#fcfdfc]">
+                    <Icon size={22} class="text-[#15803d] mb-4" />
+                    <h4 class="text-sm font-black text-[#052c17] uppercase tracking-tight mb-2">{f.title}</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed font-medium">{f.desc}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+<!-- CONTACT FORM (desain awal, tanpa kolom WhatsApp, submit ke WhatsApp) -->
+      <section id="kontak" class="py-20 md:py-32 bg-[#fcfdfc] border-t border-slate-200">
+        <div class="max-w-[1800px] mx-auto px-6">
+          <div class="grid lg:grid-cols-12 gap-12 items-start">
+
+            <!-- Left: Heading & Info -->
+            <div class="lg:col-span-5">
+              <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-[2px] bg-[#15803d]"></div>
+                <h3 class="text-[10px] font-black text-[#15803d] uppercase tracking-[0.5em]">Hubungi Kami</h3>
+              </div>
+              <h2 class="text-3xl md:text-5xl font-black text-[#052c17] uppercase tracking-tighter leading-none mb-6">
+                Mulai <span class="text-[#15803d]">Kemitraan.</span>
+              </h2>
+              <p class="text-slate-600 leading-relaxed font-medium mb-8">
+                Konsultasi pengadaan sayur untuk wilayah {district.name}. Tim sales kami akan merespon dengan penawaran harga,
+                spesifikasi produk, dan jadwal pengiriman yang sesuai kebutuhan dapur Anda.
+              </p>
+
+              <div class="space-y-4">
+                <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-slate-100">
+                  <div class="w-10 h-10 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center shrink-0">
+                    <MapPin size={18} class="text-[#15803d]" />
+                  </div>
+                  <div>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">Rute Distribusi</p>
+                    <p class="text-sm font-bold text-[#052c17] leading-relaxed">{district.deliveryRoute}</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3 p-4 rounded-2xl bg-white border border-slate-100">
+                  <div class="w-10 h-10 rounded-xl bg-green-50 border border-green-100 flex items-center justify-center shrink-0">
+                    <Clock size={18} class="text-[#15803d]" />
+                  </div>
+                  <div>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-1">Waktu Pengiriman</p>
+                    <p class="text-sm font-bold text-[#052c17] leading-relaxed">{district.logistics.time}</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start gap-3 p-4 rounded-2xl bg-green-50 border border-green-100">
+                  <div class="w-10 h-10 rounded-xl bg-[#15803d] flex items-center justify-center shrink-0">
+                    <Wallet size={18} class="text-white" />
+                  </div>
+                  <div>
+                    <p class="text-[10px] font-black uppercase tracking-widest text-[#15803d] mb-1">Skema Pembayaran</p>
+                    <p class="text-sm font-bold text-[#052c17] leading-relaxed">Termin 7 Hari atau Cash — pilih saat mengisi form.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Form -->
+            <div class="lg:col-span-7">
+              <form
+                id="wa-form"
+                class="p-8 md:p-10 rounded-3xl bg-white border border-slate-100 shadow-sm"
+              >
+                <div class="grid sm:grid-cols-2 gap-5">
+                  <!-- Nama -->
+                  <div class="sm:col-span-2">
+                    <label for="nama" class="block text-[10px] font-black uppercase tracking-widest text-slate-600 mb-2">
+                      Nama Lengkap
+                    </label>
+                    <div class="relative">
+                      <User size={16} class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        id="nama"
+                        name="nama"
+                        type="text"
+                        required
+                        placeholder="Nama Anda"
+                        class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-[#fcfdfc] text-sm font-medium text-[#052c17] placeholder:text-slate-400 focus:outline-none focus:border-[#15803d]"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Bisnis -->
+                  <div class="sm:col-span-2">
+                    <label for="bisnis" class="block text-[10px] font-black uppercase tracking-widest text-slate-600 mb-2">
+                      Nama Bisnis / Usaha
+                    </label>
+                    <div class="relative">
+                      <Building2 size={16} class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <input
+                        id="bisnis"
+                        name="bisnis"
+                        type="text"
+                        required
+                        placeholder="Restoran / Hotel / Cafe / Katering"
+                        class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-[#fcfdfc] text-sm font-medium text-[#052c17] placeholder:text-slate-400 focus:outline-none focus:border-[#15803d]"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Kebutuhan (full width, karena WhatsApp dihapus) -->
+                  <div class="sm:col-span-2">
+                    <label for="kebutuhan" class="block text-[10px] font-black uppercase tracking-widest text-slate-600 mb-2">
+                      Kebutuhan
+                    </label>
+                    <select
+                      id="kebutuhan"
+                      name="kebutuhan"
+                      required
+                      class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-[#fcfdfc] text-sm font-medium text-[#052c17] focus:outline-none focus:border-[#15803d]"
+                    >
+                      <option value="" disabled selected>Pilih segmen</option>
+                      <option value="restoran">Restoran / Rumah Makan</option>
+                      <option value="hotel">Hotel Butik / Penginapan</option>
+                      <option value="cafe">Cafe / Kedai Kopi</option>
+                      <option value="katering">Katering Acara / Event</option>
+                      <option value="pasar">Pasar Modern / Supermarket</option>
+                      <option value="lainnya">Lainnya</option>
+                    </select>
+                  </div>
+
+                  <!-- Skema Pembayaran -->
+                  <div class="sm:col-span-2">
+                    <label class="block text-[10px] font-black uppercase tracking-widest text-slate-600 mb-2">
+                      Skema Pembayaran
+                    </label>
+                    <div class="grid grid-cols-2 gap-3">
+                      <label class="relative flex items-center gap-3 p-4 rounded-xl border border-slate-200 bg-[#fcfdfc] cursor-pointer">
+                        <input
+                          type="radio"
+                          name="pembayaran"
+                          value="Termin 7 Hari"
+                          required
+                          class="w-4 h-4 accent-[#15803d]"
+                        />
+                        <div>
+                          <p class="text-sm font-black text-[#052c17] uppercase tracking-tight">Termin 7 Hari</p>
+                          <p class="text-[10px] font-medium text-slate-500">Invoice, bayar 7 hari kemudian</p>
+                        </div>
+                      </label>
+
+                      <label class="relative flex items-center gap-3 p-4 rounded-xl border border-slate-200 bg-[#fcfdfc] cursor-pointer">
+                        <input
+                          type="radio"
+                          name="pembayaran"
+                          value="Cash"
+                          required
+                          class="w-4 h-4 accent-[#15803d]"
+                        />
+                        <div>
+                          <p class="text-sm font-black text-[#052c17] uppercase tracking-tight">Cash</p>
+                          <p class="text-[10px] font-medium text-slate-500">Bayar saat pengiriman</p>
+                        </div>
+                      </label>
+                    </div>
+                  </div>
+
+                  <!-- Pesan -->
+                  <div class="sm:col-span-2">
+                    <label for="pesan" class="block text-[10px] font-black uppercase tracking-widest text-slate-600 mb-2">
+                      Pesan / Detail Kebutuhan
+                    </label>
+                    <div class="relative">
+                      <MessageSquare size={16} class="absolute left-4 top-4 text-slate-400" />
+                      <textarea
+                        id="pesan"
+                        name="pesan"
+                        rows="4"
+                        placeholder="Volume per hari, jenis sayur, area pengiriman, dll."
+                        class="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 bg-[#fcfdfc] text-sm font-medium text-[#052c17] placeholder:text-slate-400 focus:outline-none focus:border-[#15803d] resize-none"
+                      ></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="submit"
+                  class="mt-6 inline-flex items-center justify-center gap-2 w-full px-8 py-4 rounded-xl bg-[#15803d] text-white text-xs font-black uppercase tracking-widest"
+                >
+                  Kirim Permintaan <Send size={16} />
+                </button>
+
+                <p class="mt-4 text-center text-[10px] font-medium text-slate-500">
+                  Anda akan diarahkan ke WhatsApp dengan pesan otomatis berisi data form.
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Script: submit form → WhatsApp -->
+      <script>
+        const waForm = document.getElementById('wa-form') as HTMLFormElement | null;
+        const WA_NUMBER = '6287780937884';
+
+        if (waForm) {
+          waForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const data = new FormData(waForm);
+            const nama = (data.get('nama') as string) || '-';
+            const bisnis = (data.get('bisnis') as string) || '-';
+            const kebutuhan = (data.get('kebutuhan') as string) || '-';
+            const pembayaran = (data.get('pembayaran') as string) || '-';
+            const pesan = (data.get('pesan') as string) || '-';
+
+            const text =
+              `Halo CV Green Fresh Cipanas, saya ingin konsultasi pengadaan sayur.%0A%0A` +
+              `Nama: ${nama}%0A` +
+              `Bisnis/Usaha: ${bisnis}%0A` +
+              `Kebutuhan: ${kebutuhan}%0A` +
+              `Pembayaran: ${pembayaran}%0A` +
+              `Pesan: ${pesan}`;
+
+            window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+          });
+        }
+      </script>
+    </main>
+
+    <Footer />
+  </div>
+</MainLayout>
